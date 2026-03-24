@@ -3,10 +3,12 @@ import newcastle from '../data/newcastle.json';
 import durham from '../data/durham.json';
 
 // Flatten data for client-side use
-const nclTeam = newcastle.team.map(b => ({ id: b.id, name: b.name }));
-const durTeam = durham.team.map(b => ({ id: b.id, name: b.name }));
+const nclTeam     = newcastle.team.map(b => ({ id: b.id, name: b.name }));
+const durTeam     = durham.team.map(b => ({ id: b.id, name: b.name }));
 const nclServices = newcastle.services;
 const durServices = durham.services;
+const nclHours    = newcastle.hours;
+const durHours    = durham.hours;
 ---
 <section id="book" aria-labelledby="book-heading">
   <div class="container">
@@ -84,6 +86,9 @@ const durServices = durham.services;
             <label for="date" class="form-label">Preferred Date <span aria-hidden="true">*</span></label>
             <input type="date" id="date" name="date" class="form-input" required aria-required="true" />
             <span class="form-error" id="date-error" role="alert" aria-live="polite"></span>
+            <span class="sunday-warning" id="sunday-warning" hidden role="alert" aria-live="polite">
+              We're closed on Sundays — please choose another day.
+            </span>
           </div>
 
           <div class="form-group">
@@ -305,24 +310,74 @@ const durServices = durham.services;
     cursor: pointer;
     opacity: 0.5;
   }
+
+  .sunday-warning {
+    display: block;
+    font-size: 0.78rem;
+    color: #9B2626;
+    font-style: italic;
+    margin-top: 0.375rem;
+    font-family: 'DM Sans', sans-serif;
+  }
 </style>
 
-<script define:vars={{ nclTeam, durTeam, nclServices, durServices }}>
+<script define:vars={{ nclTeam, durTeam, nclServices, durServices, nclHours, durHours }}>
   // Branch data built from JSON at build time
   const branchData = {
-    newcastle: { team: nclTeam, services: nclServices },
-    durham:    { team: durTeam, services: durServices }
+    newcastle: { team: nclTeam, services: nclServices, hours: nclHours },
+    durham:    { team: durTeam, services: durServices, hours: durHours }
   };
 
-  // Default time slots (09:00–18:00 in 30-min intervals) used until real hours are added
-  function defaultTimeSlots() {
+  // Day-of-week index → day name (matches JSON keys)
+  const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  // Parse a time string like "10:00am" or "3:00pm" → total minutes since midnight
+  function parseTime(str) {
+    str = str.trim().toLowerCase();
+    const m = str.match(/^(\d+):(\d+)(am|pm)$/);
+    if (!m) return null;
+    let h = parseInt(m[1]);
+    const min = parseInt(m[2]);
+    const period = m[3];
+    if (period === 'pm' && h !== 12) h += 12;
+    if (period === 'am' && h === 12) h = 0;
+    return h * 60 + min;
+  }
+
+  // Parse "10:00am – 7:00pm" → { open: minutes, close: minutes } or null if closed
+  function parseHoursString(hoursStr) {
+    if (!hoursStr || hoursStr.trim() === 'Closed') return null;
+    const parts = hoursStr.split('–').map(s => s.trim());
+    if (parts.length !== 2) return null;
+    const open  = parseTime(parts[0]);
+    const close = parseTime(parts[1]);
+    if (open === null || close === null) return null;
+    return { open, close };
+  }
+
+  // Generate 30-min slots from open up to (close - 30) mins
+  function generateSlots(open, close) {
     const slots = [];
-    for (let h = 9; h < 18; h++) {
-      slots.push(`${String(h).padStart(2,'0')}:00`);
-      slots.push(`${String(h).padStart(2,'0')}:30`);
+    const lastSlot = close - 30;
+    let total = open;
+    while (total <= lastSlot) {
+      const h = Math.floor(total / 60);
+      const m = total % 60;
+      slots.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
+      total += 30;
     }
-    slots.push('18:00');
     return slots;
+  }
+
+  function getSlotsForDateAndBranch(dateVal, branch) {
+    const data = branchData[branch];
+    if (!data || !dateVal) return [];
+    const dayIndex = new Date(dateVal).getDay();
+    const dayName  = DAY_NAMES[dayIndex];
+    const hoursStr = data.hours[dayName];
+    const parsed   = parseHoursString(hoursStr);
+    if (!parsed) return null; // null = closed
+    return generateSlots(parsed.open, parsed.close);
   }
 
   const branchSel  = document.getElementById('branch');
@@ -382,9 +437,28 @@ const durServices = durham.services;
     });
   }
 
+  const sundayWarning = document.getElementById('sunday-warning');
+
   function populateTimeSlots() {
+    const branch  = branchSel.value;
+    const dateVal = dateInput.value;
     timeSel.innerHTML = '<option value="" disabled selected>Select a time slot</option>';
-    defaultTimeSlots().forEach(slot => {
+
+    if (!branch || !dateVal) return;
+
+    const slots = getSlotsForDateAndBranch(dateVal, branch);
+
+    if (slots === null) {
+      // Closed that day
+      sundayWarning.hidden = false;
+      dateInput.classList.add('error');
+      timeSel.innerHTML = '<option value="" disabled selected>Closed — choose another day</option>';
+      return;
+    }
+
+    sundayWarning.hidden = true;
+    dateInput.classList.remove('error');
+    slots.forEach(slot => {
       const opt = document.createElement('option');
       opt.value = slot;
       opt.textContent = slot;
@@ -403,6 +477,10 @@ const durServices = durham.services;
     const branch = branchSel.value;
     if (!branch) return;
     populateServices(branch, barberSel.value);
+  });
+
+  dateInput?.addEventListener('change', () => {
+    populateTimeSlots();
   });
 
   // Validation helpers

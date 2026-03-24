@@ -5,13 +5,13 @@ import durham from '../data/durham.json';
 type ServiceItem = { name: string; description: string; duration: string; price: number };
 type ServiceGroup = { barber: string; category: string; items: ServiceItem[] };
 
-// Group service groups by barber name
-function groupByBarber(services: ServiceGroup[]): Record<string, ServiceGroup[]> {
-  return services.reduce((acc: Record<string, ServiceGroup[]>, sg) => {
-    if (!acc[sg.barber]) acc[sg.barber] = [];
-    acc[sg.barber].push(sg);
-    return acc;
-  }, {});
+function groupByBarber(services: ServiceGroup[]): Map<string, ServiceGroup[]> {
+  const map = new Map<string, ServiceGroup[]>();
+  for (const sg of services) {
+    if (!map.has(sg.barber)) map.set(sg.barber, []);
+    map.get(sg.barber)!.push(sg);
+  }
+  return map;
 }
 
 const nclByBarber = groupByBarber(newcastle.services as ServiceGroup[]);
@@ -20,6 +20,8 @@ const durByBarber = groupByBarber(durham.services as ServiceGroup[]);
 function formatPrice(p: number) {
   return `£${p % 1 === 0 ? p.toFixed(0) : p.toFixed(2)}`;
 }
+
+const CALLOUT_NAME = 'Haircut - Callout';
 ---
 <section id="services" aria-labelledby="services-heading">
   <div class="container">
@@ -40,7 +42,7 @@ function formatPrice(p: number) {
 
     <!-- Newcastle panel -->
     <div id="services-ncl" role="tabpanel" aria-labelledby="tab-ncl" class="services-panel active">
-      {Object.entries(nclByBarber).map(([barberName, groups]) => (
+      {[...nclByBarber.entries()].map(([barberName, groups]) => (
         <div class="barber-section reveal">
           <div class="barber-section-header">
             <h3 class="barber-section-name">{barberName}</h3>
@@ -51,10 +53,17 @@ function formatPrice(p: number) {
               <p class="category-label">{group.category}</p>
               <ul role="list" class="service-list">
                 {group.items.map((item) => (
-                  <li class="service-row">
+                  <li class={`service-row${item.name === CALLOUT_NAME ? ' service-row--callout' : ''}`}>
                     <div class="service-main">
-                      <span class="service-name">{item.name}</span>
-                      {item.description && <span class="service-desc">{item.description}</span>}
+                      <div class="service-name-line">
+                        <span class="service-name">{item.name}</span>
+                        {item.name === CALLOUT_NAME && (
+                          <span class="service-badge" aria-label="Home visit service">Home Visit</span>
+                        )}
+                      </div>
+                      {item.description && (
+                        <span class="service-desc">{item.description}</span>
+                      )}
                     </div>
                     <span class="service-duration">{item.duration}</span>
                     <span class="service-price">{formatPrice(item.price)}</span>
@@ -69,7 +78,7 @@ function formatPrice(p: number) {
 
     <!-- Durham panel -->
     <div id="services-dur" role="tabpanel" aria-labelledby="tab-dur" class="services-panel" hidden>
-      {Object.entries(durByBarber).map(([barberName, groups]) => (
+      {[...durByBarber.entries()].map(([barberName, groups]) => (
         <div class="barber-section reveal">
           <div class="barber-section-header">
             <h3 class="barber-section-name">{barberName}</h3>
@@ -82,8 +91,12 @@ function formatPrice(p: number) {
                 {group.items.map((item) => (
                   <li class="service-row">
                     <div class="service-main">
-                      <span class="service-name">{item.name}</span>
-                      {item.description && <span class="service-desc">{item.description}</span>}
+                      <div class="service-name-line">
+                        <span class="service-name">{item.name}</span>
+                      </div>
+                      {item.description && (
+                        <span class="service-desc">{item.description}</span>
+                      )}
                     </div>
                     <span class="service-duration">{item.duration}</span>
                     <span class="service-price">{formatPrice(item.price)}</span>
@@ -114,12 +127,10 @@ function formatPrice(p: number) {
 
   .tab-switcher {
     display: flex;
-    gap: 0;
     margin-bottom: 3rem;
     border: 1px solid var(--border);
     width: fit-content;
   }
-
   .tab-btn {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.7rem;
@@ -134,22 +145,14 @@ function formatPrice(p: number) {
     min-height: 44px;
     transition: background 0.2s, color 0.2s;
   }
-  .tab-btn.active {
-    background: var(--accent);
-    color: #fff;
-  }
-  .tab-btn:not(.active):hover {
-    background: var(--accent-dim);
-    color: var(--text-primary);
-  }
+  .tab-btn.active { background: var(--accent); color: #fff; }
+  .tab-btn:not(.active):hover { background: var(--accent-dim); color: var(--text-primary); }
 
   .services-panel { display: none; }
   .services-panel.active { display: block; }
 
   /* Barber section */
-  .barber-section {
-    margin-bottom: 3.5rem;
-  }
+  .barber-section { margin-bottom: 3.5rem; }
 
   .barber-section-header {
     display: flex;
@@ -157,16 +160,13 @@ function formatPrice(p: number) {
     gap: 1.5rem;
     margin-bottom: 1.5rem;
   }
-
   .barber-section-name {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 400;
     letter-spacing: -0.02em;
     white-space: nowrap;
-    color: var(--text-primary);
   }
-
   .barber-section-rule {
     flex: 1;
     height: 1px;
@@ -174,10 +174,7 @@ function formatPrice(p: number) {
   }
 
   /* Category within barber */
-  .service-category-block {
-    margin-bottom: 1.5rem;
-  }
-
+  .service-category-block { margin-bottom: 1.5rem; }
   .category-label {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.62rem;
@@ -193,12 +190,12 @@ function formatPrice(p: number) {
   .service-row {
     display: grid;
     grid-template-columns: 1fr auto auto;
-    gap: 1rem 1.5rem;
-    align-items: baseline;
-    padding: 0.85rem 0;
+    gap: 0.75rem 1.5rem;
+    align-items: start;
+    padding: 0.9rem 0 0.9rem 0;
     border-bottom: 1px solid var(--border);
     position: relative;
-    transition: padding-left 0.3s ease;
+    transition: padding-left 0.25s ease;
   }
   .service-row::before {
     content: '';
@@ -213,11 +210,25 @@ function formatPrice(p: number) {
   .service-row:hover { padding-left: 0.75rem; }
   .service-row:hover::before { width: 2px; }
 
+  /* Callout — always has gold border + no hover effect needed */
+  .service-row--callout {
+    border-left: 3px solid var(--accent);
+    padding-left: 0.75rem;
+  }
+  .service-row--callout::before { display: none; }
+
   .service-main {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
     min-width: 0;
+  }
+
+  .service-name-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
 
   .service-name {
@@ -226,9 +237,24 @@ function formatPrice(p: number) {
     font-weight: 400;
   }
 
+  .service-badge {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 1px 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
   .service-desc {
     font-size: 0.8rem;
     color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.55;
     font-weight: 300;
   }
 
@@ -238,6 +264,7 @@ function formatPrice(p: number) {
     font-weight: 300;
     white-space: nowrap;
     text-align: right;
+    padding-top: 2px;
   }
 
   .service-price {
@@ -250,40 +277,31 @@ function formatPrice(p: number) {
     text-align: right;
   }
 
-  /* Mobile: stack duration under name */
+  /* Mobile: stack duration under name, price stays right */
   @media (max-width: 639px) {
     .service-row {
       grid-template-columns: 1fr auto;
       grid-template-rows: auto auto;
+      gap: 0.25rem 1rem;
     }
-    .service-main { grid-row: 1; grid-column: 1; }
-    .service-duration {
-      grid-row: 2;
-      grid-column: 1;
-      text-align: left;
-    }
-    .service-price { grid-row: 1 / 3; grid-column: 2; align-self: center; }
+    .service-main   { grid-row: 1; grid-column: 1; }
+    .service-duration { grid-row: 2; grid-column: 1; text-align: left; }
+    .service-price  { grid-row: 1 / 3; grid-column: 2; align-self: center; }
   }
 </style>
 
 <script>
-  const tabs = document.querySelectorAll('.tab-btn');
+  const tabs   = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.services-panel');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
       tab.classList.add('active');
       tab.setAttribute('aria-selected', 'true');
 
       const branch = (tab as HTMLElement).dataset.branch;
-      panels.forEach(panel => {
-        panel.classList.remove('active');
-        (panel as HTMLElement).hidden = true;
-      });
+      panels.forEach(p => { p.classList.remove('active'); (p as HTMLElement).hidden = true; });
 
       const target = branch === 'newcastle'
         ? document.getElementById('services-ncl')

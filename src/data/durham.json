@@ -5,13 +5,13 @@
   "google_maps_url": "https://maps.google.com/?q=24+Prince+Bishops+High+Street+Durham+DH1+3UJ",
   "phone": "TODO: Add Durham phone number",
   "hours": {
-    "Monday": "TODO: Add hours",
-    "Tuesday": "TODO: Add hours",
-    "Wednesday": "TODO: Add hours",
-    "Thursday": "TODO: Add hours",
-    "Friday": "TODO: Add hours",
-    "Saturday": "TODO: Add hours",
-    "Sunday": "TODO: Add hours"
+    "Monday":    "10:00am – 3:00pm",
+    "Tuesday":   "10:00am – 7:00pm",
+    "Wednesday": "10:00am – 8:00pm",
+    "Thursday":  "10:00am – 7:00pm",
+    "Friday":    "10:00am – 8:00pm",
+    "Saturday":  "10:00am – 6:00pm",
+    "Sunday":    "Closed"
   },
   "team": [
     {
@@ -40,6 +40,18 @@
     }
   ],
   "services": [
+    {
+      "barber": "Ben",
+      "category": "Haircuts",
+      "items": [
+        { "name": "Haircut", "description": "", "duration": "40 mins", "price": 25.00 },
+        { "name": "Hair and Beard", "description": "", "duration": "50 mins", "price": 30.00 },
+        { "name": "Back and Sides", "description": "", "duration": "30 mins", "price": 20.00 },
+        { "name": "Scissor Cut", "description": "", "duration": "50 mins", "price": 28.00 },
+        { "name": "Scissor Cut and Beard", "description": "", "duration": "55 mins", "price": 35.00 },
+        { "name": "Restyle", "description": "", "duration": "50 mins", "price": 35.00 }
+      ]
+    },
     {
       "barber": "Bailey",
       "category": "Haircuts",

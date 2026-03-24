@@ -38,19 +38,10 @@ const branches = [newcastle, durham];
               {Object.entries(branch.hours).map(([day, hours]) => (
                 <li class="hours-row">
                   <span class="hours-day">{day}</span>
-                  <span class="hours-time">{hours}</span>
+                  <span class={`hours-time${hours === 'Closed' ? ' hours-closed' : ''}`}>{hours}</span>
                 </li>
               ))}
             </ul>
-          </div>
-          <div class="location-footer">
-            <p class="location-phone">
-              <span class="label">Phone</span>
-              <span class="phone-placeholder">Contact via booking</span>
-            </p>
-            <a href={branch.google_maps_url} target="_blank" rel="noopener" class="directions-link" aria-label={`Get directions to ${branch.branch}`}>
-              Get Directions &nearr;
-            </a>
           </div>
         </div>
       ))}
@@ -144,7 +135,7 @@ const branches = [newcastle, durham];
     line-height: 1.6;
   }
 
-  .location-hours { margin-bottom: 2rem; }
+  .location-hours { }
   .hours-label { margin-bottom: 1rem; }
 
   .hours-row {
@@ -152,33 +143,13 @@ const branches = [newcastle, durham];
     justify-content: space-between;
     font-size: 0.85rem;
     padding: 0.4rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid var(--border);
     color: var(--text-secondary);
   }
   .hours-day { font-weight: 400; color: var(--text-primary); }
   .hours-time { font-weight: 300; }
-
-  .location-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .location-phone { display: flex; flex-direction: column; gap: 4px; }
-  .phone-placeholder { font-size: 0.85rem; color: var(--text-secondary); }
-
-  .directions-link {
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .hours-closed {
     color: var(--text-secondary);
-    font-family: 'DM Sans', sans-serif;
-    transition: color 0.2s;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
+    font-style: italic;
   }
-  .directions-link:hover { color: var(--accent); }
 </style>

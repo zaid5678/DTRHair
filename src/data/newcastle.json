@@ -5,13 +5,13 @@
   "google_maps_url": "https://maps.google.com/?q=Arch+5+Forth+Street+Newcastle+upon+Tyne+NE1+3PL",
   "phone": "TODO: Add Newcastle phone number",
   "hours": {
-    "Monday": "TODO: Add hours",
-    "Tuesday": "TODO: Add hours",
-    "Wednesday": "TODO: Add hours",
-    "Thursday": "TODO: Add hours",
-    "Friday": "TODO: Add hours",
-    "Saturday": "TODO: Add hours",
-    "Sunday": "TODO: Add hours"
+    "Monday":    "10:00am – 3:00pm",
+    "Tuesday":   "10:00am – 7:00pm",
+    "Wednesday": "10:00am – 8:00pm",
+    "Thursday":  "10:00am – 7:00pm",
+    "Friday":    "10:00am – 8:00pm",
+    "Saturday":  "10:00am – 6:00pm",
+    "Sunday":    "Closed"
   },
   "team": [
     {
@@ -56,6 +56,29 @@
     }
   ],
   "services": [
+    {
+      "barber": "Dean",
+      "category": "Haircuts",
+      "items": [
+        { "name": "Cut and Style", "description": "Transform your look with a tailored haircut and style perfect for any special occasion. Whether you're preparing for a wedding, a party, or just a night out. Always look your best.", "duration": "50 mins", "price": 40.00 },
+        { "name": "Back and Sides", "description": "", "duration": "30 mins", "price": 22.50 },
+        { "name": "Taper Top Up (just the sides)", "description": "Only applies if I've previously cut your hair to shape", "duration": "15 mins", "price": 15.00 },
+        { "name": "Restyle", "description": "", "duration": "1 hour", "price": 45.00 },
+        { "name": "Haircut - Callout", "description": "Experience the convenience of a professional haircut right at your home or office. Enjoy personalized attention and skillful techniques in a comfortable setting, perfect for busy lifestyles. Whether you're preparing for a meeting or simply indulging in self-care, this service is designed for your convenience and satisfaction.", "duration": "2 hours 30 mins", "price": 125.00 }
+      ]
+    },
+    {
+      "barber": "Ben",
+      "category": "Haircuts",
+      "items": [
+        { "name": "Haircut", "description": "", "duration": "40 mins", "price": 25.00 },
+        { "name": "Hair and Beard", "description": "", "duration": "50 mins", "price": 30.00 },
+        { "name": "Back and Sides", "description": "", "duration": "30 mins", "price": 20.00 },
+        { "name": "Scissor Cut", "description": "", "duration": "50 mins", "price": 28.00 },
+        { "name": "Scissor Cut and Beard", "description": "", "duration": "55 mins", "price": 35.00 },
+        { "name": "Restyle", "description": "", "duration": "50 mins", "price": 35.00 }
+      ]
+    },
     {
       "barber": "Yasin",
       "category": "Haircuts",
