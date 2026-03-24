@@ -38,9 +38,11 @@ const durHours    = durham.hours;
 
     <div id="form-container" class="reveal reveal-delay-3">
       <form id="booking-form" novalidate aria-label="Booking enquiry form">
-        <input type="hidden" name="_subject" value="New Booking Request — DTRHair" />
-        <input type="hidden" name="_replyto" id="hidden-replyto" value="" />
-        <input type="text" name="_gotcha" style="display:none" />
+        <input type="hidden" name="access_key" value="fa615d0c-ced3-4792-b9e9-67df6cff9bb1" />
+        <input type="hidden" name="subject" value="New Booking Request — DTRHair" />
+        <input type="hidden" name="from_name" value="DTRHair Website" />
+        <input type="hidden" id="hidden-replyto" name="replyto" value="" />
+        <input type="checkbox" name="botcheck" style="display:none" />
         <div class="form-grid">
           <div class="form-group">
             <label for="name" class="form-label">Full Name <span aria-hidden="true">*</span></label>
@@ -569,10 +571,8 @@ const durHours    = durham.hours;
     submitText.hidden   = true;
     submitLoading.hidden = false;
 
-    const FORMSPREE_ID = 'mgongjrn';
-
     try {
-      const resp = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const resp = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
