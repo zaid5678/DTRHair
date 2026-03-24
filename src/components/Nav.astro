@@ -21,7 +21,6 @@ const pathname = Astro.url.pathname;
 
 <!-- Mobile overlay -->
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-  <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
   <nav aria-label="Mobile navigation">
     <ul role="list">
       <li><a href="/about" class="mobile-link">About</a></li>
@@ -29,6 +28,9 @@ const pathname = Astro.url.pathname;
       <li><a href="/team" class="mobile-link">Team</a></li>
       <li><a href="/reviews" class="mobile-link">Reviews</a></li>
     </ul>
+    <div class="mobile-ctas">
+      <a href="/book" class="mobile-book-btn mobile-link">Book Now</a>
+    </div>
   </nav>
 </div>
 
@@ -38,7 +40,7 @@ const pathname = Astro.url.pathname;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 1002;
     transition: background 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
     padding: 0;
   }
@@ -148,7 +150,7 @@ const pathname = Astro.url.pathname;
     position: fixed;
     inset: 0;
     background: var(--surface);
-    z-index: 999;
+    z-index: 1001;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -230,7 +232,6 @@ const pathname = Astro.url.pathname;
   const nav = document.getElementById('main-nav');
   const hamburger = document.getElementById('nav-hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
-  const mobileClose = document.getElementById('mobile-close');
   const mobileLinks = document.querySelectorAll('.mobile-link');
 
   // Scroll behaviour
@@ -242,15 +243,6 @@ const pathname = Astro.url.pathname;
     }
   });
 
-  // Open menu
-  hamburger?.addEventListener('click', () => {
-    hamburger.classList.add('open');
-    hamburger.setAttribute('aria-expanded', 'true');
-    mobileMenu?.classList.add('open');
-    mobileMenu?.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  });
-
   // Close menu
   function closeMenu() {
     hamburger?.classList.remove('open');
@@ -260,6 +252,18 @@ const pathname = Astro.url.pathname;
     document.body.style.overflow = '';
   }
 
-  mobileClose?.addEventListener('click', closeMenu);
+  // Toggle menu open/close
+  hamburger?.addEventListener('click', () => {
+    if (hamburger.classList.contains('open')) {
+      closeMenu();
+    } else {
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileMenu?.classList.add('open');
+      mobileMenu?.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
   mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 </script>
