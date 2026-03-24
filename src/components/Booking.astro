@@ -1,4 +1,12 @@
 ---
+import newcastle from '../data/newcastle.json';
+import durham from '../data/durham.json';
+
+// Flatten data for client-side use
+const nclTeam = newcastle.team.map(b => ({ id: b.id, name: b.name }));
+const durTeam = durham.team.map(b => ({ id: b.id, name: b.name }));
+const nclServices = newcastle.services;
+const durServices = durham.services;
 ---
 <section id="book" aria-labelledby="book-heading">
   <div class="container">
@@ -10,12 +18,12 @@
     </div>
 
     <div class="online-ctas reveal reveal-delay-1">
-      <a href="https://www.fresha.com/a/dtrhair-newcastle-newcastle-upon-tyne-arch-5-forth-street-cj00mtwz"
+      <a href={newcastle.fresha_url}
          target="_blank" rel="noopener" class="online-btn" aria-label="Book online at Newcastle">
         <span class="online-btn-branch">Newcastle</span>
         <span class="online-btn-label">Book Online &rarr;</span>
       </a>
-      <a href="https://www.fresha.com/a/dtrhair-durham-durham-24-highst-prince-bishops-n1e4qdh7"
+      <a href={durham.fresha_url}
          target="_blank" rel="noopener" class="online-btn" aria-label="Book online at Durham">
         <span class="online-btn-branch">Durham</span>
         <span class="online-btn-label">Book Online &rarr;</span>
@@ -226,32 +234,29 @@
     min-height: 52px;
     border-radius: 0;
   }
-
   .form-input:focus {
     border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
   }
-
-  .form-input.error { border-color: #8B1A1A; }
-
-  .form-input::placeholder { color: rgba(136,136,136,0.5); }
+  .form-input.error { border-color: #9B2626; }
+  .form-input::placeholder { color: rgba(107,101,96,0.45); }
 
   .form-select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-color: var(--surface);
     padding-right: 2.5rem;
     cursor: pointer;
   }
-  .form-select option { background: var(--surface); color: var(--text-primary); }
+  .form-select option { background: var(--bg); color: var(--text-primary); }
 
   .form-textarea { min-height: 120px; resize: vertical; }
 
   .form-error {
     display: block;
     font-size: 0.75rem;
-    color: #c94a4a;
+    color: #9B2626;
     margin-top: 0.375rem;
     min-height: 1rem;
     font-family: 'DM Sans', sans-serif;
@@ -265,7 +270,7 @@
     font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--bg);
+    color: #fff;
     background: var(--accent);
     border: 1px solid var(--accent);
     padding: 1rem 2.5rem;
@@ -283,202 +288,125 @@
     background: var(--surface);
     margin-top: 2rem;
   }
-  .success-icon {
-    font-size: 2rem;
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
-  .form-success h3 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-  }
+  .success-icon { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; }
+  .form-success h3 { font-size: 1.5rem; font-weight: 400; margin-bottom: 0.5rem; }
   .form-success p { color: var(--text-secondary); font-size: 0.9rem; }
 
   .form-error-message {
     padding: 1rem 1.5rem;
-    border: 1px solid #8B1A1A;
-    background: rgba(139,26,26,0.1);
+    border: 1px solid #9B2626;
+    background: rgba(155,38,38,0.05);
     margin-top: 1rem;
     font-size: 0.9rem;
-    color: #c94a4a;
+    color: #9B2626;
   }
 
-  /* Date input */
   input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(0.6);
     cursor: pointer;
+    opacity: 0.5;
   }
 </style>
 
-<script>
-  interface BranchHours {
-    open: string;
-    close: string;
-  }
-
-  interface BranchService {
-    name: string;
-    price: string;
-    category: string;
-  }
-
-  interface BranchData {
-    barbers: string[];
-    services: BranchService[];
-    hours: {
-      weekday: BranchHours;
-      saturday: BranchHours;
-      sunday: BranchHours | null;
-    };
-  }
-
-  const branchData: Record<string, BranchData> = {
-    newcastle: {
-      barbers: ['Dawud', 'Tariq'],
-      services: [
-        { name: 'Classic Haircut', price: '£20', category: 'Haircuts' },
-        { name: 'Skin Fade', price: '£22', category: 'Haircuts' },
-        { name: 'Scissor Cut', price: '£25', category: 'Haircuts' },
-        { name: 'Shape Up / Line Up', price: '£15', category: 'Haircuts' },
-        { name: 'Kids Cut (under 12)', price: '£15', category: 'Haircuts' },
-        { name: 'Beard Trim', price: '£10', category: 'Beard' },
-        { name: 'Beard Shape & Line', price: '£15', category: 'Beard' },
-        { name: 'Hot Towel Shave', price: '£20', category: 'Beard' },
-        { name: 'Beard & Haircut Combo', price: '£30', category: 'Beard' },
-        { name: 'Hair Design / Pattern', price: '£5', category: 'Extras' },
-        { name: 'Eyebrow Threading', price: '£8', category: 'Extras' },
-        { name: 'Scalp Treatment', price: '£12', category: 'Extras' },
-      ],
-      hours: {
-        weekday: { open: '09:00', close: '19:00' },
-        saturday: { open: '08:00', close: '18:00' },
-        sunday: { open: '10:00', close: '16:00' }
-      }
-    },
-    durham: {
-      barbers: ['Raheem', 'Zain'],
-      services: [
-        { name: 'Classic Haircut', price: '£20', category: 'Haircuts' },
-        { name: 'Skin Fade', price: '£22', category: 'Haircuts' },
-        { name: 'Scissor Cut', price: '£25', category: 'Haircuts' },
-        { name: 'Shape Up / Line Up', price: '£15', category: 'Haircuts' },
-        { name: 'Kids Cut (under 12)', price: '£15', category: 'Haircuts' },
-        { name: 'Beard Trim', price: '£10', category: 'Beard' },
-        { name: 'Beard Shape & Line', price: '£15', category: 'Beard' },
-        { name: 'Hot Towel Shave', price: '£20', category: 'Beard' },
-        { name: 'Beard & Haircut Combo', price: '£30', category: 'Beard' },
-        { name: 'Hair Design / Pattern', price: '£5', category: 'Extras' },
-        { name: 'Eyebrow Threading', price: '£8', category: 'Extras' },
-        { name: 'Scalp Treatment', price: '£12', category: 'Extras' },
-      ],
-      hours: {
-        weekday: { open: '09:00', close: '19:00' },
-        saturday: { open: '08:00', close: '18:00' },
-        sunday: null
-      }
-    }
+<script define:vars={{ nclTeam, durTeam, nclServices, durServices }}>
+  // Branch data built from JSON at build time
+  const branchData = {
+    newcastle: { team: nclTeam, services: nclServices },
+    durham:    { team: durTeam, services: durServices }
   };
 
-  function generateTimeSlots(open: string, close: string): string[] {
-    const slots: string[] = [];
-    const [openH, openM] = open.split(':').map(Number);
-    const [closeH, closeM] = close.split(':').map(Number);
-    let h = openH, m = openM;
-    while (h < closeH || (h === closeH && m < closeM)) {
-      slots.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
-      m += 30;
-      if (m >= 60) { h++; m -= 60; }
+  // Default time slots (09:00–18:00 in 30-min intervals) used until real hours are added
+  function defaultTimeSlots() {
+    const slots = [];
+    for (let h = 9; h < 18; h++) {
+      slots.push(`${String(h).padStart(2,'0')}:00`);
+      slots.push(`${String(h).padStart(2,'0')}:30`);
     }
+    slots.push('18:00');
     return slots;
   }
 
-  const branchSelect = document.getElementById('branch') as HTMLSelectElement;
-  const barberSelect = document.getElementById('barber') as HTMLSelectElement;
-  const serviceSelect = document.getElementById('service') as HTMLSelectElement;
-  const dateInput = document.getElementById('date') as HTMLInputElement;
-  const timeSelect = document.getElementById('time') as HTMLSelectElement;
+  const branchSel  = document.getElementById('branch');
+  const barberSel  = document.getElementById('barber');
+  const serviceSel = document.getElementById('service');
+  const dateInput  = document.getElementById('date');
+  const timeSel    = document.getElementById('time');
 
-  // Set min date to today
+  // Block past dates
   const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const dd = String(today.getDate()).padStart(2, '0');
-  if (dateInput) dateInput.min = `${yyyy}-${mm}-${dd}`;
+  const pad = n => String(n).padStart(2,'0');
+  if (dateInput) dateInput.min = `${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
 
-  function updateBranchDependents(branch: string) {
+  function populateBarbers(branch) {
     const data = branchData[branch];
-    if (!data) return;
-
-    barberSelect.innerHTML = '<option value="">No preference</option>';
-    data.barbers.forEach((b: string) => {
+    barberSel.innerHTML = '<option value="">No preference</option>';
+    data.team.forEach(b => {
       const opt = document.createElement('option');
-      opt.value = b.toLowerCase();
-      opt.textContent = b;
-      barberSelect.appendChild(opt);
+      opt.value = b.name;
+      opt.textContent = b.name;
+      barberSel.appendChild(opt);
     });
-
-    serviceSelect.innerHTML = '<option value="" disabled selected>Select a service</option>';
-    let lastCategory = '';
-    data.services.forEach((s: BranchService) => {
-      if (s.category !== lastCategory) {
-        const group = document.createElement('optgroup');
-        group.label = s.category;
-        serviceSelect.appendChild(group);
-        lastCategory = s.category;
-      }
-      const opt = document.createElement('option');
-      opt.value = s.name.toLowerCase().replace(/\s+/g, '-');
-      opt.textContent = `${s.name} — ${s.price}`;
-      const lastGroup = serviceSelect.querySelector('optgroup:last-of-type');
-      lastGroup?.appendChild(opt);
-    });
-
-    updateTimeSlots(branch);
   }
 
-  function updateTimeSlots(branch: string) {
+  function populateServices(branch, selectedBarber) {
     const data = branchData[branch];
-    if (!data) return;
+    serviceSel.innerHTML = '<option value="" disabled selected>Select a service</option>';
 
-    const selectedDate = dateInput?.value;
-    let hours: BranchHours | null = data.hours.weekday;
+    // Filter service groups: if barber selected, only their groups; else all groups
+    const groups = selectedBarber
+      ? data.services.filter(sg => sg.barber === selectedBarber)
+      : data.services;
 
-    if (selectedDate) {
-      const dayOfWeek = new Date(selectedDate).getDay();
-      if (dayOfWeek === 6) hours = data.hours.saturday;
-      else if (dayOfWeek === 0) hours = data.hours.sunday;
-    }
+    // De-dupe items by name when showing all barbers
+    const seen = new Set();
+    let lastCategory = '';
 
-    timeSelect.innerHTML = '<option value="" disabled selected>Select a time slot</option>';
+    groups.forEach(sg => {
+      sg.items.forEach(item => {
+        const key = item.name;
+        if (!selectedBarber && seen.has(key)) return;
+        seen.add(key);
 
-    if (!hours) {
-      const opt = document.createElement('option');
-      opt.value = '';
-      opt.disabled = true;
-      opt.textContent = 'Closed on Sundays';
-      timeSelect.appendChild(opt);
-      return;
-    }
+        const catLabel = selectedBarber ? sg.category : `${sg.barber} — ${sg.category}`;
+        if (catLabel !== lastCategory) {
+          const grp = document.createElement('optgroup');
+          grp.label = catLabel;
+          serviceSel.appendChild(grp);
+          lastCategory = catLabel;
+        }
+        const opt = document.createElement('option');
+        opt.value = item.name;
+        const price = item.price % 1 === 0 ? `£${item.price}` : `£${item.price.toFixed(2)}`;
+        opt.textContent = `${item.name} — ${price}`;
+        serviceSel.querySelector('optgroup:last-of-type').appendChild(opt);
+      });
+    });
+  }
 
-    const slots = generateTimeSlots(hours.open, hours.close);
-    slots.forEach(slot => {
+  function populateTimeSlots() {
+    timeSel.innerHTML = '<option value="" disabled selected>Select a time slot</option>';
+    defaultTimeSlots().forEach(slot => {
       const opt = document.createElement('option');
       opt.value = slot;
       opt.textContent = slot;
-      timeSelect.appendChild(opt);
+      timeSel.appendChild(opt);
     });
   }
 
-  branchSelect?.addEventListener('change', () => {
-    updateBranchDependents(branchSelect.value);
+  branchSel?.addEventListener('change', () => {
+    const branch = branchSel.value;
+    populateBarbers(branch);
+    populateServices(branch, '');
+    populateTimeSlots();
   });
 
-  dateInput?.addEventListener('change', () => {
-    if (branchSelect.value) updateTimeSlots(branchSelect.value);
+  barberSel?.addEventListener('change', () => {
+    const branch = branchSel.value;
+    if (!branch) return;
+    populateServices(branch, barberSel.value);
   });
 
-  function validateField(id: string, errorId: string, message: string, condition: boolean): boolean {
+  // Validation helpers
+  function validateField(id, errorId, message, condition) {
     const input = document.getElementById(id);
     const error = document.getElementById(errorId);
     if (!condition) {
@@ -491,35 +419,33 @@
     return true;
   }
 
-  const form = document.getElementById('booking-form') as HTMLFormElement;
+  const form = document.getElementById('booking-form');
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const nameVal = (document.getElementById('name') as HTMLInputElement).value.trim();
-    const emailVal = (document.getElementById('email') as HTMLInputElement).value.trim();
-    const phoneVal = (document.getElementById('phone') as HTMLInputElement).value.trim();
-    const branchVal = (document.getElementById('branch') as HTMLSelectElement).value;
-    const serviceVal = (document.getElementById('service') as HTMLSelectElement).value;
-    const dateVal = (document.getElementById('date') as HTMLInputElement).value;
-    const timeVal = (document.getElementById('time') as HTMLSelectElement).value;
+    const nameVal    = document.getElementById('name').value.trim();
+    const emailVal   = document.getElementById('email').value.trim();
+    const phoneVal   = document.getElementById('phone').value.trim();
+    const branchVal  = document.getElementById('branch').value;
+    const serviceVal = document.getElementById('service').value;
+    const dateVal    = document.getElementById('date').value;
+    const timeVal    = document.getElementById('time').value;
 
     let valid = true;
-    valid = validateField('name', 'name-error', 'Please enter your full name.', nameVal.length > 1) && valid;
-    valid = validateField('email', 'email-error', 'Please enter a valid email address.', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) && valid;
-    valid = validateField('phone', 'phone-error', 'Please enter a valid phone number.', /^[\d\s\+\-\(\)]{7,15}$/.test(phoneVal)) && valid;
-    valid = validateField('branch', 'branch-error', 'Please select a branch.', branchVal !== '') && valid;
-    valid = validateField('service', 'service-error', 'Please select a service.', serviceVal !== '') && valid;
-    valid = validateField('date', 'date-error', 'Please select a date.', dateVal !== '') && valid;
-    valid = validateField('time', 'time-error', 'Please select a time slot.', timeVal !== '') && valid;
-
+    valid = validateField('name',    'name-error',    'Please enter your full name.',           nameVal.length > 1)               && valid;
+    valid = validateField('email',   'email-error',   'Please enter a valid email address.',    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) && valid;
+    valid = validateField('phone',   'phone-error',   'Please enter a valid phone number.',     /^[\d\s+\-()]{7,15}$/.test(phoneVal))         && valid;
+    valid = validateField('branch',  'branch-error',  'Please select a branch.',                branchVal !== '')                 && valid;
+    valid = validateField('service', 'service-error', 'Please select a service.',               serviceVal !== '')                && valid;
+    valid = validateField('date',    'date-error',    'Please select a date.',                  dateVal !== '')                   && valid;
+    valid = validateField('time',    'time-error',    'Please select a time slot.',             timeVal !== '')                   && valid;
     if (!valid) return;
 
-    const submitBtn = form.querySelector('.submit-btn') as HTMLButtonElement;
-    const submitText = form.querySelector('.submit-text') as HTMLElement;
-    const submitLoading = form.querySelector('.submit-loading') as HTMLElement;
-
-    submitBtn.disabled = true;
-    submitText.hidden = true;
+    const submitBtn     = form.querySelector('.submit-btn');
+    const submitText    = form.querySelector('.submit-text');
+    const submitLoading = form.querySelector('.submit-loading');
+    submitBtn.disabled  = true;
+    submitText.hidden   = true;
     submitLoading.hidden = false;
 
     // TODO: Replace YOUR_FORM_ID with your Formspree endpoint: https://formspree.io/f/YOUR_FORM_ID
@@ -528,36 +454,34 @@
     try {
       if (FORMSPREE_ID === 'YOUR_FORM_ID') {
         // Demo mode — simulate success
-        await new Promise(r => setTimeout(r, 1200));
+        await new Promise(r => setTimeout(r, 1000));
         form.hidden = true;
-        const success = document.getElementById('form-success') as HTMLElement;
-        const successMsg = document.getElementById('success-message') as HTMLElement;
-        successMsg.textContent = `Thank you, ${nameVal}. We'll confirm your booking at ${emailVal} shortly.`;
+        const success = document.getElementById('form-success');
+        document.getElementById('success-message').textContent =
+          `Thank you, ${nameVal}. We'll confirm your booking at ${emailVal} shortly.`;
         success.hidden = false;
         return;
       }
 
-      const formData = new FormData(form);
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const resp = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
-        body: formData,
+        body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
 
-      if (response.ok) {
+      if (resp.ok) {
         form.hidden = true;
-        const success = document.getElementById('form-success') as HTMLElement;
-        const successMsg = document.getElementById('success-message') as HTMLElement;
-        successMsg.textContent = `Thank you, ${nameVal}. We'll confirm your booking at ${emailVal} shortly.`;
+        const success = document.getElementById('form-success');
+        document.getElementById('success-message').textContent =
+          `Thank you, ${nameVal}. We'll confirm your booking at ${emailVal} shortly.`;
         success.hidden = false;
       } else {
-        throw new Error('Submission failed');
+        throw new Error('failed');
       }
     } catch {
-      const errorMsg = document.getElementById('form-error-msg') as HTMLElement;
-      errorMsg.hidden = false;
-      submitBtn.disabled = false;
-      submitText.hidden = false;
+      document.getElementById('form-error-msg').hidden = false;
+      submitBtn.disabled   = false;
+      submitText.hidden    = false;
       submitLoading.hidden = true;
     }
   });

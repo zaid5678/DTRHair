@@ -1,62 +1,100 @@
 {
   "branch": "Newcastle",
-  "address": "Arch 5, Forth Street, Newcastle upon Tyne, NE1 3NZ",
-  "mapsUrl": "https://maps.google.com/?q=Arch+5+Forth+Street+Newcastle+upon+Tyne",
-  "freshaUrl": "https://www.fresha.com/a/dtrhair-newcastle-newcastle-upon-tyne-arch-5-forth-street-cj00mtwz",
+  "address": "Arch 5, Forth St, Newcastle upon Tyne, NE1 3PL",
+  "fresha_url": "https://www.fresha.com/a/dtrhair-newcastle-newcastle-upon-tyne-arch-5-forth-street-cj00mtwz",
+  "google_maps_url": "https://maps.google.com/?q=Arch+5+Forth+Street+Newcastle+upon+Tyne+NE1+3PL",
   "phone": "TODO: Add Newcastle phone number",
-  "rating": 4.9,
-  "reviewCount": "180+",
   "hours": {
-    "Monday": "09:00 – 19:00",
-    "Tuesday": "09:00 – 19:00",
-    "Wednesday": "09:00 – 19:00",
-    "Thursday": "09:00 – 19:00",
-    "Friday": "09:00 – 19:00",
-    "Saturday": "08:00 – 18:00",
-    "Sunday": "10:00 – 16:00"
+    "Monday": "TODO: Add hours",
+    "Tuesday": "TODO: Add hours",
+    "Wednesday": "TODO: Add hours",
+    "Thursday": "TODO: Add hours",
+    "Friday": "TODO: Add hours",
+    "Saturday": "TODO: Add hours",
+    "Sunday": "TODO: Add hours"
   },
-  "openTime": "09:00",
-  "closeTime": "19:00",
-  "satOpenTime": "08:00",
-  "satCloseTime": "18:00",
-  "sunOpenTime": "10:00",
-  "sunCloseTime": "16:00",
-  "services": [
-    { "category": "Haircuts", "name": "Classic Haircut", "price": "£20" },
-    { "category": "Haircuts", "name": "Skin Fade", "price": "£22" },
-    { "category": "Haircuts", "name": "Scissor Cut", "price": "£25" },
-    { "category": "Haircuts", "name": "Shape Up / Line Up", "price": "£15" },
-    { "category": "Haircuts", "name": "Kids Cut (under 12)", "price": "£15" },
-    { "category": "Beard", "name": "Beard Trim", "price": "£10" },
-    { "category": "Beard", "name": "Beard Shape & Line", "price": "£15" },
-    { "category": "Beard", "name": "Hot Towel Shave", "price": "£20" },
-    { "category": "Beard", "name": "Beard & Haircut Combo", "price": "£30" },
-    { "category": "Extras", "name": "Hair Design / Pattern", "price": "£5" },
-    { "category": "Extras", "name": "Eyebrow Threading", "price": "£8" },
-    { "category": "Extras", "name": "Scalp Treatment", "price": "£12" }
-  ],
-  "barbers": [
+  "team": [
     {
-      "id": "dawud",
-      "name": "Dawud",
-      "role": "Lead Barber",
+      "id": "dean-newcastle",
+      "name": "Dean",
       "branch": "Newcastle",
-      "bio": "Founder of DTRHair. Over 8 years of experience crafting precise fades and textured cuts. Specialises in skin fades and bespoke beard grooming.",
-      "image": null
+      "image": "/images/barbers/dean-newcastle.svg",
+      "image_placeholder": true,
+      "bio": "TODO: Add Dean's bio"
     },
     {
-      "id": "tariq",
-      "name": "Tariq",
-      "role": "Senior Barber",
+      "id": "ben-newcastle",
+      "name": "Ben",
       "branch": "Newcastle",
-      "bio": "Renowned for his sharp line-ups and attention to detail. Tariq brings 6 years of experience and a passion for modern barbering techniques.",
-      "image": null
+      "image": "/images/barbers/ben-newcastle.svg",
+      "image_placeholder": true,
+      "bio": "TODO: Add Ben's bio"
+    },
+    {
+      "id": "yasin-newcastle",
+      "name": "Yasin",
+      "branch": "Newcastle",
+      "image": "/images/barbers/yasin-newcastle.svg",
+      "image_placeholder": true,
+      "bio": "TODO: Add Yasin's bio"
+    },
+    {
+      "id": "ell-newcastle",
+      "name": "Ell",
+      "branch": "Newcastle",
+      "image": "/images/barbers/ell-newcastle.svg",
+      "image_placeholder": true,
+      "bio": "TODO: Add Ell's bio"
+    },
+    {
+      "id": "max-newcastle",
+      "name": "Max",
+      "branch": "Newcastle",
+      "image": "/images/barbers/max-newcastle.svg",
+      "image_placeholder": true,
+      "bio": "TODO: Add Max's bio"
+    }
+  ],
+  "services": [
+    {
+      "barber": "Yasin",
+      "category": "Haircuts",
+      "items": [
+        { "name": "Haircut", "description": "Standard haircut / Skinfade", "duration": "35 mins", "price": 25.00 },
+        { "name": "Student Haircut", "description": "", "duration": "35 mins", "price": 20.00 },
+        { "name": "Scissor Cut", "description": "Longer hairstyle, maintenance cut", "duration": "50 mins", "price": 25.00 }
+      ]
+    },
+    {
+      "barber": "Yasin",
+      "category": "Beard",
+      "items": [
+        { "name": "Beard Trim", "description": "Beard trim & lineup", "duration": "15 mins", "price": 7.00 },
+        { "name": "Student Beard Trim", "description": "", "duration": "15 mins", "price": 5.00 }
+      ]
+    },
+    {
+      "barber": "Ell",
+      "category": "Haircuts",
+      "items": [
+        { "name": "Haircut and Beard", "description": "", "duration": "1 hour", "price": 28.00 },
+        { "name": "Haircut", "description": "", "duration": "30 mins", "price": 25.00 }
+      ]
+    },
+    {
+      "barber": "Max",
+      "category": "Haircuts",
+      "items": [
+        { "name": "Hair and Beard Trim", "description": "", "duration": "1 hour", "price": 22.50 },
+        { "name": "Haircut", "description": "", "duration": "45 mins", "price": 17.50 },
+        { "name": "Taper Top Up", "description": "", "duration": "30 mins", "price": 12.50 }
+      ]
     }
   ],
   "reviews": [
-    { "name": "James M.", "stars": 5, "text": "Best barbers in Newcastle without a doubt. Dawud takes his time, listens to exactly what you want and delivers every single time. The atmosphere is unreal too.", "branch": "Newcastle" },
+    { "name": "James M.", "stars": 5, "text": "Best barbers in Newcastle without a doubt. Really takes his time, listens to exactly what you want and delivers every single time. The atmosphere is unreal too.", "branch": "Newcastle" },
     { "name": "Ryan T.", "stars": 5, "text": "Been going to DTRHair for 2 years. The consistency is what gets me — perfect fade every visit. Wouldn't go anywhere else.", "branch": "Newcastle" },
-    { "name": "Mohammed A.", "stars": 5, "text": "Tariq is an artist with clippers. Cleanest skin fade I've ever had. The shop itself looks incredible too.", "branch": "Newcastle" },
+    { "name": "Mohammed A.", "stars": 5, "text": "An artist with clippers. Cleanest skin fade I've ever had. The shop itself looks incredible too.", "branch": "Newcastle" },
     { "name": "Josh W.", "stars": 5, "text": "Walked in on a whim and was blown away. Top tier service, great music, proper barbershop vibes. Booked my next appointment before I left.", "branch": "Newcastle" },
     { "name": "Tom H.", "stars": 5, "text": "Can't fault it. Consistently excellent, always on time, and they actually have a conversation with you. My go-to spot in Newcastle.", "branch": "Newcastle" }
   ]

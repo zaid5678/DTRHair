@@ -1,61 +1,86 @@
 {
   "branch": "Durham",
-  "address": "24 High Street, Prince Bishops, Durham, DH1 3UJ",
-  "mapsUrl": "https://maps.google.com/?q=24+High+Street+Prince+Bishops+Durham",
-  "freshaUrl": "https://www.fresha.com/a/dtrhair-durham-durham-24-highst-prince-bishops-n1e4qdh7",
+  "address": "24 Prince Bishops, High St, Durham, DH1 3UJ",
+  "fresha_url": "https://www.fresha.com/a/dtrhair-durham-durham-24-highst-prince-bishops-n1e4qdh7",
+  "google_maps_url": "https://maps.google.com/?q=24+Prince+Bishops+High+Street+Durham+DH1+3UJ",
   "phone": "TODO: Add Durham phone number",
-  "rating": 4.8,
-  "reviewCount": "120+",
   "hours": {
-    "Monday": "09:00 – 19:00",
-    "Tuesday": "09:00 – 19:00",
-    "Wednesday": "09:00 – 19:00",
-    "Thursday": "09:00 – 19:00",
-    "Friday": "09:00 – 19:00",
-    "Saturday": "08:00 – 18:00",
-    "Sunday": "Closed"
+    "Monday": "TODO: Add hours",
+    "Tuesday": "TODO: Add hours",
+    "Wednesday": "TODO: Add hours",
+    "Thursday": "TODO: Add hours",
+    "Friday": "TODO: Add hours",
+    "Saturday": "TODO: Add hours",
+    "Sunday": "TODO: Add hours"
   },
-  "openTime": "09:00",
-  "closeTime": "19:00",
-  "satOpenTime": "08:00",
-  "satCloseTime": "18:00",
-  "sunOpenTime": null,
-  "sunCloseTime": null,
-  "services": [
-    { "category": "Haircuts", "name": "Classic Haircut", "price": "£20" },
-    { "category": "Haircuts", "name": "Skin Fade", "price": "£22" },
-    { "category": "Haircuts", "name": "Scissor Cut", "price": "£25" },
-    { "category": "Haircuts", "name": "Shape Up / Line Up", "price": "£15" },
-    { "category": "Haircuts", "name": "Kids Cut (under 12)", "price": "£15" },
-    { "category": "Beard", "name": "Beard Trim", "price": "£10" },
-    { "category": "Beard", "name": "Beard Shape & Line", "price": "£15" },
-    { "category": "Beard", "name": "Hot Towel Shave", "price": "£20" },
-    { "category": "Beard", "name": "Beard & Haircut Combo", "price": "£30" },
-    { "category": "Extras", "name": "Hair Design / Pattern", "price": "£5" },
-    { "category": "Extras", "name": "Eyebrow Threading", "price": "£8" },
-    { "category": "Extras", "name": "Scalp Treatment", "price": "£12" }
-  ],
-  "barbers": [
+  "team": [
     {
-      "id": "raheem",
-      "name": "Raheem",
-      "role": "Barber",
+      "id": "ben-durham",
+      "name": "Ben",
       "branch": "Durham",
-      "bio": "Durham's go-to for clean scissor cuts and expert beard shaping. 4 years of experience with a calm, consultative approach to every client.",
-      "image": null
+      "image": "/images/barbers/ben-durham.svg",
+      "image_placeholder": true,
+      "bio": "TODO: Add Ben's bio"
     },
     {
-      "id": "zain",
-      "name": "Zain",
-      "role": "Barber",
+      "id": "bailey-durham",
+      "name": "Bailey",
       "branch": "Durham",
-      "bio": "Specialist in textured and curly hair. 3 years of experience delivering consistent, high-quality results across all hair types.",
-      "image": null
+      "image": "/images/barbers/bailey-durham.svg",
+      "image_placeholder": true,
+      "bio": "TODO: Add Bailey's bio"
+    },
+    {
+      "id": "marios-durham",
+      "name": "Marios",
+      "branch": "Durham",
+      "image": "/images/barbers/marios-durham.svg",
+      "image_placeholder": true,
+      "bio": "TODO: Add Marios's bio"
+    }
+  ],
+  "services": [
+    {
+      "barber": "Bailey",
+      "category": "Haircuts",
+      "items": [
+        { "name": "Haircut", "description": "", "duration": "40 mins", "price": 25.00 },
+        { "name": "Hair and Beard", "description": "", "duration": "50 mins", "price": 30.00 },
+        { "name": "Restyle", "description": "", "duration": "50 mins", "price": 35.00 },
+        { "name": "Scissor Cut", "description": "", "duration": "50 mins", "price": 28.00 },
+        { "name": "Scissor Cut and Beard", "description": "", "duration": "55 mins", "price": 35.00 },
+        { "name": "Back and Sides", "description": "", "duration": "30 mins", "price": 20.00 },
+        { "name": "Taper Top Up", "description": "", "duration": "15 mins", "price": 15.00 }
+      ]
+    },
+    {
+      "barber": "Bailey",
+      "category": "Beard",
+      "items": [
+        { "name": "Beard Trim", "description": "", "duration": "15 mins", "price": 15.00 }
+      ]
+    },
+    {
+      "barber": "Marios",
+      "category": "Haircuts",
+      "items": [
+        { "name": "Haircut", "description": "", "duration": "40 mins", "price": 25.00 },
+        { "name": "Hair and Beard", "description": "", "duration": "50 mins", "price": 30.00 },
+        { "name": "Scissor Cut", "description": "", "duration": "50 mins", "price": 28.00 },
+        { "name": "Restyle", "description": "", "duration": "50 mins", "price": 35.00 }
+      ]
+    },
+    {
+      "barber": "Marios",
+      "category": "Beard",
+      "items": [
+        { "name": "Beard Trim", "description": "", "duration": "15 mins", "price": 15.00 }
+      ]
     }
   ],
   "reviews": [
-    { "name": "Liam C.", "stars": 5, "text": "Raheem did an amazing job on my cut. Really took the time to understand what I was going for. Walked out feeling like a new man.", "branch": "Durham" },
-    { "name": "Daniel S.", "stars": 4, "text": "Solid barbers, really professional and the Durham branch is a great space. Zain sorted my curly hair out perfectly — finally found someone who knows how to handle it.", "branch": "Durham" },
-    { "name": "Aaron B.", "stars": 5, "text": "DTRHair Durham is the real deal. Clean shop, friendly staff and a genuinely excellent cut. Raheem's beard trim is second to none.", "branch": "Durham" }
+    { "name": "Liam C.", "stars": 5, "text": "Did an amazing job on my cut. Really took the time to understand what I was going for. Walked out feeling like a new man.", "branch": "Durham" },
+    { "name": "Daniel S.", "stars": 4, "text": "Solid barbers, really professional and the Durham branch is a great space. Sorted my curly hair out perfectly — finally found someone who knows how to handle it.", "branch": "Durham" },
+    { "name": "Aaron B.", "stars": 5, "text": "DTRHair Durham is the real deal. Clean shop, friendly staff and a genuinely excellent cut. Beard trim is second to none.", "branch": "Durham" }
   ]
 }
