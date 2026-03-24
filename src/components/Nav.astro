@@ -1,16 +1,17 @@
 ---
+const pathname = Astro.url.pathname;
 ---
 <nav id="main-nav" aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo" aria-label="DTRHair Home">DTRHair</a>
+    <a href="/" class="nav-logo" aria-label="DTRHair Home">DTRHair</a>
     <ul class="nav-links" role="list">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#team">Team</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#book">Book</a></li>
+      <li><a href="/about" class={pathname === '/about' ? 'active' : ''}>About</a></li>
+      <li><a href="/services" class={pathname === '/services' ? 'active' : ''}>Services</a></li>
+      <li><a href="/team" class={pathname === '/team' ? 'active' : ''}>Team</a></li>
+      <li><a href="/reviews" class={pathname === '/reviews' ? 'active' : ''}>Reviews</a></li>
+      <li><a href="/book" class={pathname === '/book' ? 'active' : ''}>Book</a></li>
     </ul>
-    <a href="#book" class="nav-cta">Book Now</a>
+    <a href="/book" class="nav-cta">Book Now</a>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -22,11 +23,11 @@
   <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
   <nav aria-label="Mobile navigation">
     <ul role="list">
-      <li><a href="#about" class="mobile-link">About</a></li>
-      <li><a href="#services" class="mobile-link">Services</a></li>
-      <li><a href="#team" class="mobile-link">Team</a></li>
-      <li><a href="#reviews" class="mobile-link">Reviews</a></li>
-      <li><a href="#book" class="mobile-link">Book</a></li>
+      <li><a href="/about" class="mobile-link">About</a></li>
+      <li><a href="/services" class="mobile-link">Services</a></li>
+      <li><a href="/team" class="mobile-link">Team</a></li>
+      <li><a href="/reviews" class="mobile-link">Reviews</a></li>
+      <li><a href="/book" class="mobile-link">Book</a></li>
     </ul>
     <div class="mobile-ctas">
       <a href="https://www.fresha.com/a/dtrhair-newcastle-newcastle-upon-tyne-arch-5-forth-street-cj00mtwz" target="_blank" rel="noopener" class="mobile-book-btn">Book Newcastle</a>
@@ -99,8 +100,10 @@
     background: var(--accent);
     transition: width 0.3s ease;
   }
-  .nav-links a:hover { color: var(--text-primary); }
-  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--text-primary); }
+  .nav-links a:hover::after,
+  .nav-links a.active::after { width: 100%; }
 
   .nav-cta {
     display: none;
