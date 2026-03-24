@@ -18,24 +18,24 @@
       "id": "ben-durham",
       "name": "Ben",
       "branch": "Durham",
-      "image": "/images/barbers/ben-durham.svg",
-      "image_placeholder": true,
+      "image": "/images/barbers/ben-durham.jpeg",
+      "image_placeholder": false,
       "bio": "TODO: Add Ben's bio"
     },
     {
       "id": "bailey-durham",
       "name": "Bailey",
       "branch": "Durham",
-      "image": "/images/barbers/bailey-durham.svg",
-      "image_placeholder": true,
+      "image": "/images/barbers/bailey-durham.jpeg",
+      "image_placeholder": false,
       "bio": "TODO: Add Bailey's bio"
     },
     {
       "id": "marios-durham",
       "name": "Marios",
       "branch": "Durham",
-      "image": "/images/barbers/marios-durham.svg",
-      "image_placeholder": true,
+      "image": "/images/barbers/marios-durham.jpeg",
+      "image_placeholder": false,
       "bio": "TODO: Add Marios's bio"
     }
   ],

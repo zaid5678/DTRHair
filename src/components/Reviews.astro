@@ -38,9 +38,11 @@ const allReviews = [...newcastle.reviews, ...durham.reviews];
               <span class={si < review.stars ? 'star filled' : 'star'} aria-hidden="true">&#9733;</span>
             ))}
           </div>
-          <blockquote class="review-text">
-            <p>"{review.text}"</p>
-          </blockquote>
+          {review.text && (
+            <blockquote class="review-text">
+              <p>"{review.text}"</p>
+            </blockquote>
+          )}
         </article>
       ))}
     </div>

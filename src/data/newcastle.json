@@ -18,40 +18,40 @@
       "id": "dean-newcastle",
       "name": "Dean",
       "branch": "Newcastle",
-      "image": "/images/barbers/dean-newcastle.svg",
-      "image_placeholder": true,
+      "image": "/images/barbers/dean-newcastle.jpeg",
+      "image_placeholder": false,
       "bio": "TODO: Add Dean's bio"
     },
     {
       "id": "ben-newcastle",
       "name": "Ben",
       "branch": "Newcastle",
-      "image": "/images/barbers/ben-newcastle.svg",
-      "image_placeholder": true,
+      "image": "/images/barbers/ben-newcastle.jpeg",
+      "image_placeholder": false,
       "bio": "TODO: Add Ben's bio"
     },
     {
       "id": "yasin-newcastle",
       "name": "Yasin",
       "branch": "Newcastle",
-      "image": "/images/barbers/yasin-newcastle.svg",
-      "image_placeholder": true,
+      "image": "/images/barbers/yasin-newcastle.jpeg",
+      "image_placeholder": false,
       "bio": "TODO: Add Yasin's bio"
     },
     {
       "id": "ell-newcastle",
       "name": "Ell",
       "branch": "Newcastle",
-      "image": "/images/barbers/ell-newcastle.svg",
-      "image_placeholder": true,
+      "image": "/images/barbers/ell-newcastle.png",
+      "image_placeholder": false,
       "bio": "TODO: Add Ell's bio"
     },
     {
       "id": "max-newcastle",
       "name": "Max",
       "branch": "Newcastle",
-      "image": "/images/barbers/max-newcastle.svg",
-      "image_placeholder": true,
+      "image": "/images/barbers/max-newcastle.jpeg",
+      "image_placeholder": false,
       "bio": "TODO: Add Max's bio"
     }
   ],
@@ -115,10 +115,15 @@
     }
   ],
   "reviews": [
-    { "name": "James M.", "stars": 5, "text": "Best barbers in Newcastle without a doubt. Really takes his time, listens to exactly what you want and delivers every single time. The atmosphere is unreal too.", "branch": "Newcastle" },
-    { "name": "Ryan T.", "stars": 5, "text": "Been going to DTRHair for 2 years. The consistency is what gets me — perfect fade every visit. Wouldn't go anywhere else.", "branch": "Newcastle" },
-    { "name": "Mohammed A.", "stars": 5, "text": "An artist with clippers. Cleanest skin fade I've ever had. The shop itself looks incredible too.", "branch": "Newcastle" },
-    { "name": "Josh W.", "stars": 5, "text": "Walked in on a whim and was blown away. Top tier service, great music, proper barbershop vibes. Booked my next appointment before I left.", "branch": "Newcastle" },
-    { "name": "Tom H.", "stars": 5, "text": "Can't fault it. Consistently excellent, always on time, and they actually have a conversation with you. My go-to spot in Newcastle.", "branch": "Newcastle" }
+    { "name": "Bobby", "stars": 5, "text": "", "branch": "Newcastle" },
+    { "name": "Cole", "stars": 5, "text": "", "branch": "Newcastle" },
+    { "name": "Mahdee", "stars": 5, "text": "", "branch": "Newcastle" },
+    { "name": "Sonny", "stars": 5, "text": "", "branch": "Newcastle" },
+    { "name": "Arthur", "stars": 5, "text": "", "branch": "Newcastle" },
+    { "name": "Luke", "stars": 5, "text": "", "branch": "Newcastle" },
+    { "name": "Nick", "stars": 5, "text": "", "branch": "Newcastle" },
+    { "name": "Daniel", "stars": 5, "text": "", "branch": "Newcastle" },
+    { "name": "Tanvir", "stars": 5, "text": "", "branch": "Newcastle" },
+    { "name": "Aiden", "stars": 5, "text": "", "branch": "Newcastle" }
   ]
 }
