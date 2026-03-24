@@ -41,7 +41,7 @@ const durHours    = durham.hours;
         <input type="hidden" name="access_key" value="fa615d0c-ced3-4792-b9e9-67df6cff9bb1" />
         <input type="hidden" name="subject" value="New Booking Request — DTRHair" />
         <input type="hidden" name="from_name" value="DTRHair Website" />
-        <input type="hidden" id="hidden-replyto" name="replyto" value="" />
+        <input type="hidden" name="autoresponse" value="Thank you for your booking request at DTRHair. We've received your enquiry and will be in touch shortly to confirm your appointment." />
         <input type="checkbox" name="botcheck" style="display:none" />
         <div class="form-grid">
           <div class="form-group">
@@ -122,7 +122,7 @@ const durHours    = durham.hours;
         </div>
       </form>
 
-      <div id="form-success" class="form-success" hidden role="status" aria-live="polite">
+      <div id="form-success" class="form-success form--hidden" role="status" aria-live="polite">
         <div class="success-icon" aria-hidden="true">&#10003;</div>
         <h3 id="success-message">Thank you. We'll be in touch shortly.</h3>
         <p>We'll confirm your booking details via email.</p>
@@ -303,6 +303,8 @@ const durHours    = durham.hours;
   .form-success h3 { font-size: 1.5rem; font-weight: 400; margin-bottom: 0.5rem; }
   .form-success p { color: var(--text-secondary); font-size: 0.9rem; }
 
+  .form--hidden { display: none !important; }
+
   .reset-btn {
     margin-top: 1.5rem;
     font-family: 'DM Sans', sans-serif;
@@ -463,11 +465,12 @@ const durHours    = durham.hours;
   const sundayWarning = document.getElementById('sunday-warning');
 
   document.getElementById('reset-form-btn')?.addEventListener('click', () => {
-    const form    = document.getElementById('booking-form');
-    const success = document.getElementById('form-success');
+    const form      = document.getElementById('booking-form');
+    const success   = document.getElementById('form-success');
+    const submitBtn = form.querySelector('.submit-btn');
     form.reset();
-    form.hidden    = false;
-    success.hidden = true;
+    form.classList.remove('form--hidden');
+    success.classList.add('form--hidden');
     barberSel.innerHTML  = '<option value="">No preference (select branch first)</option>';
     serviceSel.innerHTML = '<option value="" disabled selected>Select a service (select branch first)</option>';
     timeSel.innerHTML    = '<option value="" disabled selected>Select a time slot</option>';
@@ -475,7 +478,6 @@ const durHours    = durham.hours;
     document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
     document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
     document.getElementById('form-error-msg').hidden = true;
-    const submitBtn = form.querySelector('.submit-btn');
     submitBtn.disabled = false;
     form.querySelector('.submit-text').hidden = false;
     form.querySelector('.submit-loading').hidden = true;
@@ -561,9 +563,6 @@ const durHours    = durham.hours;
     valid = validateField('time',    'time-error',    'Please select a time slot.',             timeVal !== '')                   && valid;
     if (!valid) return;
 
-    // Set reply-to so Formspree can identify the submitter's email
-    document.getElementById('hidden-replyto').value = emailVal;
-
     const submitBtn     = form.querySelector('.submit-btn');
     const submitText    = form.querySelector('.submit-text');
     const submitLoading = form.querySelector('.submit-loading');
@@ -578,14 +577,15 @@ const durHours    = durham.hours;
         headers: { 'Accept': 'application/json' }
       });
 
-      if (resp.ok) {
-        form.hidden = true;
+      const data = await resp.json();
+      if (resp.ok && data.success) {
         const success = document.getElementById('form-success');
         document.getElementById('success-message').textContent =
-          `Thank you, ${nameVal}. We'll confirm your booking at ${emailVal} shortly.`;
-        success.hidden = false;
+          `Thank you, ${nameVal}. A confirmation has been sent to ${emailVal}.`;
+        form.classList.add('form--hidden');
+        success.classList.remove('form--hidden');
       } else {
-        throw new Error('failed');
+        throw new Error(data.message || 'failed');
       }
     } catch {
       document.getElementById('form-error-msg').hidden = false;
