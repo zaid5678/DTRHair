@@ -1,0 +1,182 @@
+---
+---
+<section id="hero" aria-label="Hero">
+  <div class="hero-bg">
+    <div class="hero-grid-overlay"></div>
+  </div>
+  <div class="hero-content container">
+    <div class="hero-label label reveal">Newcastle · Durham</div>
+    <h1 class="hero-headline reveal reveal-delay-1">
+      <span class="line">The Art</span>
+      <span class="line italic">of the Cut</span>
+    </h1>
+    <p class="hero-sub reveal reveal-delay-2">Two locations. One standard.</p>
+    <div class="hero-ctas reveal reveal-delay-3">
+      <a href="https://www.fresha.com/a/dtrhair-newcastle-newcastle-upon-tyne-arch-5-forth-street-cj00mtwz"
+         target="_blank" rel="noopener" class="hero-btn hero-btn--primary" aria-label="Book at Newcastle branch">
+        Book Newcastle
+      </a>
+      <a href="https://www.fresha.com/a/dtrhair-durham-durham-24-highst-prince-bishops-n1e4qdh7"
+         target="_blank" rel="noopener" class="hero-btn hero-btn--secondary" aria-label="Book at Durham branch">
+        Book Durham
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,169,110,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(139,26,26,0.05) 0%, transparent 50%),
+      var(--bg);
+  }
+
+  .hero-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.25;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 80%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  .hero-label {
+    margin-bottom: 2rem;
+  }
+
+  .hero-headline {
+    font-size: clamp(64px, 10vw, 140px);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+  }
+
+  .hero-headline .line {
+    display: block;
+  }
+
+  .hero-headline .italic {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-btn {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    min-height: 52px;
+    display: inline-flex;
+    align-items: center;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .hero-btn--primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: 1px solid var(--accent);
+  }
+  .hero-btn--primary:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .hero-btn--secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+  .hero-btn--secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .hero-scroll span {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.7); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+</style>
+
+<script>
+  // Staggered hero load animation
+  const reveals = document.querySelectorAll('#hero .reveal');
+  setTimeout(() => {
+    reveals.forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add('visible');
+      }, i * 150);
+    });
+  }, 200);
+</script>

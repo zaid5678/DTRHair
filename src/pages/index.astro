@@ -1,0 +1,76 @@
+---
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Team from '../components/Team.astro';
+import Reviews from '../components/Reviews.astro';
+import Booking from '../components/Booking.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- SEO -->
+  <title>DTRHair &mdash; Premium Barbershop | Newcastle &amp; Durham</title>
+  <meta name="description" content="DTRHair is a premium barbershop with locations in Newcastle and Durham. Expert fades, scissor cuts, beard grooming and more. Book online via Fresha." />
+  <meta name="keywords" content="barber Newcastle, barber Durham, skin fade Newcastle, DTRHair, premium barbershop North East England" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="DTRHair — Premium Barbershop | Newcastle &amp; Durham" />
+  <meta property="og:description" content="Precision. Craft. Character. Two premium barbershop locations in the North East of England." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dtrhair.co.uk" />
+  <meta property="og:image" content="/og-image.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DTRHair — Premium Barbershop" />
+  <meta name="twitter:description" content="Two locations. One standard. Book your appointment today." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Fonts preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <Nav />
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <Team />
+    <Reviews />
+    <Booking />
+  </main>
+  <Footer />
+
+  <script>
+    // Scroll reveal observer
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => {
+      // Skip hero elements (animated separately)
+      if (!el.closest('#hero')) {
+        observer.observe(el);
+      }
+    });
+  </script>
+</body>
+</html>

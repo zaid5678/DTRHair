@@ -1,0 +1,163 @@
+---
+import newcastle from '../data/newcastle.json';
+import durham from '../data/durham.json';
+
+const allBarbers = [...newcastle.barbers, ...durham.barbers];
+
+const avatarAccents = ['#C9A96E', '#8B6F47', '#A87D4A', '#D4B07A'];
+---
+<section id="team" aria-labelledby="team-heading">
+  <div class="container">
+    <div class="team-header reveal">
+      <span class="label">The Team</span>
+      <div class="divider"></div>
+      <h2 id="team-heading">Meet Your Barbers</h2>
+    </div>
+
+    <div class="team-grid">
+      {allBarbers.map((barber, i) => (
+        <article class={`barber-card reveal reveal-delay-${(i % 4) + 1}`} aria-label={barber.name}>
+          <div class="barber-image-wrap">
+            <div class="barber-avatar" style={`--avatar-accent: ${avatarAccents[i % 4]}`} aria-hidden="true">
+              <span class="barber-initial">{barber.name.charAt(0)}</span>
+            </div>
+            <div class="barber-overlay"></div>
+          </div>
+          <div class="barber-info">
+            <div class="barber-meta">
+              <span class="barber-branch label">{barber.branch}</span>
+            </div>
+            <h3 class="barber-name">{barber.name}</h3>
+            <p class="barber-role">{barber.role}</p>
+            <p class="barber-bio">{barber.bio}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  #team {
+    border-top: 1px solid var(--border);
+  }
+
+  .team-header { margin-bottom: 4rem; }
+  .team-header h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-top: 1rem;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  @media (min-width: 640px) {
+    .team-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 1024px) {
+    .team-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  }
+
+  .barber-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .barber-image-wrap {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+
+  .barber-avatar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, var(--surface-2) 0%, #1e1e1e 100%);
+    position: relative;
+    filter: grayscale(1);
+    transition: filter 0.4s ease;
+  }
+
+  .barber-card:hover .barber-avatar {
+    filter: grayscale(0);
+  }
+
+  .barber-avatar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 30%, rgba(201,169,110,0.08) 0%, transparent 70%);
+  }
+
+  .barber-initial {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(80px, 15vw, 120px);
+    font-weight: 300;
+    color: var(--avatar-accent, var(--accent));
+    opacity: 0.4;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  .barber-card:hover .barber-initial {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+
+  .barber-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, var(--surface) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .barber-card:hover .barber-overlay { opacity: 0.6; }
+
+  .barber-info {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .barber-meta { margin-bottom: 0.5rem; }
+
+  .barber-name {
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.2rem;
+    transition: color 0.2s;
+  }
+  .barber-card:hover .barber-name { color: var(--accent); }
+
+  .barber-role {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .barber-bio {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+</style>

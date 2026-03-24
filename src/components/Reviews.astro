@@ -1,0 +1,169 @@
+---
+import newcastle from '../data/newcastle.json';
+import durham from '../data/durham.json';
+
+const allReviews = [...newcastle.reviews, ...durham.reviews];
+---
+<section id="reviews" aria-labelledby="reviews-heading">
+  <div class="container">
+    <div class="reviews-header">
+      <div class="reveal">
+        <span class="label">What People Say</span>
+        <div class="divider"></div>
+        <h2 id="reviews-heading">Client Reviews</h2>
+      </div>
+      <div class="rating-display reveal reveal-delay-1" aria-label="Overall rating">
+        <span class="rating-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <div class="rating-meta">
+          <span class="rating-number">4.9</span>
+          <span class="rating-count">300+ Reviews</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      {allReviews.map((review, i) => (
+        <article class={`review-card reveal reveal-delay-${(i % 4) + 1}`} aria-label={`Review by ${review.name}`}>
+          <div class="review-header">
+            <div class="reviewer-avatar" aria-hidden="true">
+              {review.name.charAt(0)}
+            </div>
+            <div class="reviewer-meta">
+              <p class="reviewer-name">{review.name}</p>
+              <p class="review-branch label">{review.branch}</p>
+            </div>
+          </div>
+          <div class="review-stars" aria-label={`${review.stars} out of 5 stars`}>
+            {Array.from({length: 5}).map((_, si) => (
+              <span class={si < review.stars ? 'star filled' : 'star'} aria-hidden="true">&#9733;</span>
+            ))}
+          </div>
+          <blockquote class="review-text">
+            <p>"{review.text}"</p>
+          </blockquote>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  #reviews {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .reviews-header h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-top: 1rem;
+  }
+
+  .rating-display {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .rating-stars {
+    font-size: 1.5rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+
+  .rating-meta {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rating-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .rating-count {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  @media (min-width: 640px) {
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 1024px) {
+    .reviews-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+
+  .review-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+  .review-card:hover { border-color: rgba(201,169,110,0.3); }
+
+  .review-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .reviewer-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .reviewer-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .review-branch {
+    font-size: 0.65rem;
+    margin-top: 2px;
+  }
+
+  .review-stars { margin-bottom: 1rem; }
+  .star { color: var(--border); font-size: 0.85rem; }
+  .star.filled { color: var(--accent); }
+
+  .review-text p {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    font-weight: 300;
+    font-style: italic;
+  }
+</style>

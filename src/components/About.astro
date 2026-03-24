@@ -1,0 +1,184 @@
+---
+import newcastle from '../data/newcastle.json';
+import durham from '../data/durham.json';
+
+const branches = [newcastle, durham];
+---
+<section id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about-intro">
+      <div class="reveal">
+        <span class="label">About DTRHair</span>
+        <div class="divider"></div>
+      </div>
+      <h2 id="about-heading" class="about-headline reveal reveal-delay-1">
+        Precision.<br/>Craft.<br/><em>Character.</em>
+      </h2>
+      <p class="about-body reveal reveal-delay-2">
+        DTRHair is a premium barbershop rooted in Newcastle and Durham. We believe a great haircut is more than a service — it's a ritual. Our barbers combine technical precision with a genuine passion for craft, delivering results that speak for themselves.
+      </p>
+    </div>
+
+    <div class="locations-grid">
+      {branches.map((branch, i) => (
+        <div class={`location-card reveal reveal-delay-${i + 1}`} role="article">
+          <div class="location-header">
+            <h3 class="location-name">{branch.branch}</h3>
+            <a href={branch.freshaUrl} target="_blank" rel="noopener" class="location-book-link" aria-label={`Book at ${branch.branch}`}>
+              Book Now &rarr;
+            </a>
+          </div>
+          <div class="location-divider"></div>
+          <address class="location-address" aria-label="Address">
+            {branch.address}
+          </address>
+          <div class="location-hours" aria-label="Opening hours">
+            <p class="hours-label label">Hours</p>
+            <ul role="list">
+              {Object.entries(branch.hours).map(([day, hours]) => (
+                <li class="hours-row">
+                  <span class="hours-day">{day}</span>
+                  <span class="hours-time">{hours}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="location-footer">
+            <p class="location-phone">
+              <span class="label">Phone</span>
+              <span class="phone-placeholder">Contact via booking</span>
+            </p>
+            <a href={branch.mapsUrl} target="_blank" rel="noopener" class="directions-link" aria-label={`Get directions to ${branch.branch}`}>
+              Get Directions &nearr;
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  #about {
+    border-top: 1px solid var(--border);
+  }
+
+  .about-intro {
+    max-width: 640px;
+    margin-bottom: 80px;
+  }
+
+  .about-headline {
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin: 1.5rem 0;
+    line-height: 1;
+  }
+  .about-headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .about-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 520px;
+  }
+
+  .locations-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .locations-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .location-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+  }
+
+  .location-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .location-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .location-book-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .location-book-link:hover { opacity: 0.7; }
+
+  .location-divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  address {
+    font-style: normal;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .location-hours { margin-bottom: 2rem; }
+  .hours-label { margin-bottom: 1rem; }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text-secondary);
+  }
+  .hours-day { font-weight: 400; color: var(--text-primary); }
+  .hours-time { font-weight: 300; }
+
+  .location-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .location-phone { display: flex; flex-direction: column; gap: 4px; }
+  .phone-placeholder { font-size: 0.85rem; color: var(--text-secondary); }
+
+  .directions-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-family: 'DM Sans', sans-serif;
+    transition: color 0.2s;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .directions-link:hover { color: var(--accent); }
+</style>

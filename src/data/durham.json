@@ -1,0 +1,61 @@
+{
+  "branch": "Durham",
+  "address": "24 High Street, Prince Bishops, Durham, DH1 3UJ",
+  "mapsUrl": "https://maps.google.com/?q=24+High+Street+Prince+Bishops+Durham",
+  "freshaUrl": "https://www.fresha.com/a/dtrhair-durham-durham-24-highst-prince-bishops-n1e4qdh7",
+  "phone": "TODO: Add Durham phone number",
+  "rating": 4.8,
+  "reviewCount": "120+",
+  "hours": {
+    "Monday": "09:00 – 19:00",
+    "Tuesday": "09:00 – 19:00",
+    "Wednesday": "09:00 – 19:00",
+    "Thursday": "09:00 – 19:00",
+    "Friday": "09:00 – 19:00",
+    "Saturday": "08:00 – 18:00",
+    "Sunday": "Closed"
+  },
+  "openTime": "09:00",
+  "closeTime": "19:00",
+  "satOpenTime": "08:00",
+  "satCloseTime": "18:00",
+  "sunOpenTime": null,
+  "sunCloseTime": null,
+  "services": [
+    { "category": "Haircuts", "name": "Classic Haircut", "price": "£20" },
+    { "category": "Haircuts", "name": "Skin Fade", "price": "£22" },
+    { "category": "Haircuts", "name": "Scissor Cut", "price": "£25" },
+    { "category": "Haircuts", "name": "Shape Up / Line Up", "price": "£15" },
+    { "category": "Haircuts", "name": "Kids Cut (under 12)", "price": "£15" },
+    { "category": "Beard", "name": "Beard Trim", "price": "£10" },
+    { "category": "Beard", "name": "Beard Shape & Line", "price": "£15" },
+    { "category": "Beard", "name": "Hot Towel Shave", "price": "£20" },
+    { "category": "Beard", "name": "Beard & Haircut Combo", "price": "£30" },
+    { "category": "Extras", "name": "Hair Design / Pattern", "price": "£5" },
+    { "category": "Extras", "name": "Eyebrow Threading", "price": "£8" },
+    { "category": "Extras", "name": "Scalp Treatment", "price": "£12" }
+  ],
+  "barbers": [
+    {
+      "id": "raheem",
+      "name": "Raheem",
+      "role": "Barber",
+      "branch": "Durham",
+      "bio": "Durham's go-to for clean scissor cuts and expert beard shaping. 4 years of experience with a calm, consultative approach to every client.",
+      "image": null
+    },
+    {
+      "id": "zain",
+      "name": "Zain",
+      "role": "Barber",
+      "branch": "Durham",
+      "bio": "Specialist in textured and curly hair. 3 years of experience delivering consistent, high-quality results across all hair types.",
+      "image": null
+    }
+  ],
+  "reviews": [
+    { "name": "Liam C.", "stars": 5, "text": "Raheem did an amazing job on my cut. Really took the time to understand what I was going for. Walked out feeling like a new man.", "branch": "Durham" },
+    { "name": "Daniel S.", "stars": 4, "text": "Solid barbers, really professional and the Durham branch is a great space. Zain sorted my curly hair out perfectly — finally found someone who knows how to handle it.", "branch": "Durham" },
+    { "name": "Aaron B.", "stars": 5, "text": "DTRHair Durham is the real deal. Clean shop, friendly staff and a genuinely excellent cut. Raheem's beard trim is second to none.", "branch": "Durham" }
+  ]
+}

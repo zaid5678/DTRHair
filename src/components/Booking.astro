@@ -1,0 +1,564 @@
+---
+---
+<section id="book" aria-labelledby="book-heading">
+  <div class="container">
+    <div class="book-header reveal">
+      <span class="label">Book</span>
+      <div class="divider"></div>
+      <h2 id="book-heading">Reserve Your Chair</h2>
+      <p class="book-sub">Book online instantly via Fresha, or send us a direct enquiry below.</p>
+    </div>
+
+    <div class="online-ctas reveal reveal-delay-1">
+      <a href="https://www.fresha.com/a/dtrhair-newcastle-newcastle-upon-tyne-arch-5-forth-street-cj00mtwz"
+         target="_blank" rel="noopener" class="online-btn" aria-label="Book online at Newcastle">
+        <span class="online-btn-branch">Newcastle</span>
+        <span class="online-btn-label">Book Online &rarr;</span>
+      </a>
+      <a href="https://www.fresha.com/a/dtrhair-durham-durham-24-highst-prince-bishops-n1e4qdh7"
+         target="_blank" rel="noopener" class="online-btn" aria-label="Book online at Durham">
+        <span class="online-btn-branch">Durham</span>
+        <span class="online-btn-label">Book Online &rarr;</span>
+      </a>
+    </div>
+
+    <div class="form-divider reveal reveal-delay-2">
+      <span>or send an enquiry</span>
+    </div>
+
+    <div id="form-container" class="reveal reveal-delay-3">
+      <form id="booking-form" novalidate aria-label="Booking enquiry form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name" class="form-label">Full Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="name" name="name" class="form-input" required autocomplete="name" aria-required="true" placeholder="Your full name" />
+            <span class="form-error" id="name-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address <span aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" class="form-input" required autocomplete="email" aria-required="true" placeholder="your@email.com" />
+            <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone Number <span aria-hidden="true">*</span></label>
+            <input type="tel" id="phone" name="phone" class="form-input" required autocomplete="tel" aria-required="true" placeholder="07700 000000" />
+            <span class="form-error" id="phone-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="branch" class="form-label">Preferred Branch <span aria-hidden="true">*</span></label>
+            <select id="branch" name="branch" class="form-input form-select" required aria-required="true">
+              <option value="" disabled selected>Select a branch</option>
+              <option value="newcastle">Newcastle</option>
+              <option value="durham">Durham</option>
+            </select>
+            <span class="form-error" id="branch-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="barber" class="form-label">Preferred Barber</label>
+            <select id="barber" name="barber" class="form-input form-select" aria-label="Select preferred barber">
+              <option value="" selected>No preference (select branch first)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="service" class="form-label">Service <span aria-hidden="true">*</span></label>
+            <select id="service" name="service" class="form-input form-select" required aria-required="true">
+              <option value="" disabled selected>Select a service (select branch first)</option>
+            </select>
+            <span class="form-error" id="service-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="date" class="form-label">Preferred Date <span aria-hidden="true">*</span></label>
+            <input type="date" id="date" name="date" class="form-input" required aria-required="true" />
+            <span class="form-error" id="date-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="time" class="form-label">Preferred Time <span aria-hidden="true">*</span></label>
+            <select id="time" name="time" class="form-input form-select" required aria-required="true">
+              <option value="" disabled selected>Select a time slot</option>
+            </select>
+            <span class="form-error" id="time-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group form-group--full">
+            <label for="notes" class="form-label">Additional Notes</label>
+            <textarea id="notes" name="notes" class="form-input form-textarea" rows="4" placeholder="Any specific requirements or requests..." aria-label="Additional notes"></textarea>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="submit-btn" aria-label="Submit booking request">
+            <span class="submit-text">Request Booking</span>
+            <span class="submit-loading" aria-hidden="true" hidden>Sending...</span>
+          </button>
+        </div>
+
+        <div id="form-success" class="form-success" hidden role="status" aria-live="polite">
+          <div class="success-icon" aria-hidden="true">&#10003;</div>
+          <h3 id="success-message">Thank you. We'll be in touch shortly.</h3>
+          <p>We'll confirm your booking details via email.</p>
+        </div>
+
+        <div id="form-error-msg" class="form-error-message" hidden role="alert" aria-live="assertive">
+          <p>Something went wrong. Please try again or contact us directly via Fresha.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  #book {
+    border-top: 1px solid var(--border);
+  }
+
+  .book-header { margin-bottom: 3rem; }
+  .book-header h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-top: 1rem;
+  }
+  .book-sub {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    max-width: 480px;
+  }
+
+  .online-ctas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 480px) { .online-ctas { grid-template-columns: 1fr; } }
+
+  .online-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.2s, background 0.2s;
+    min-height: 100px;
+  }
+  .online-btn:hover { border-color: var(--accent); background: var(--accent-dim); }
+
+  .online-btn-branch {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .online-btn-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .form-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .form-divider::before,
+  .form-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .form-divider span {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  @media (min-width: 640px) {
+    .form-grid { grid-template-columns: 1fr 1fr; }
+    .form-group--full { grid-column: 1 / -1; }
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .form-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    padding: 0.875rem 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    min-height: 52px;
+    border-radius: 0;
+  }
+
+  .form-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
+  }
+
+  .form-input.error { border-color: #8B1A1A; }
+
+  .form-input::placeholder { color: rgba(136,136,136,0.5); }
+
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-color: var(--surface);
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+  .form-select option { background: var(--surface); color: var(--text-primary); }
+
+  .form-textarea { min-height: 120px; resize: vertical; }
+
+  .form-error {
+    display: block;
+    font-size: 0.75rem;
+    color: #c94a4a;
+    margin-top: 0.375rem;
+    min-height: 1rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .form-footer { display: flex; align-items: center; gap: 1rem; }
+
+  .submit-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    min-height: 52px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .submit-btn:hover { background: transparent; color: var(--accent); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .form-success {
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 1px solid rgba(201,169,110,0.3);
+    background: var(--surface);
+    margin-top: 2rem;
+  }
+  .success-icon {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .form-success h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .form-success p { color: var(--text-secondary); font-size: 0.9rem; }
+
+  .form-error-message {
+    padding: 1rem 1.5rem;
+    border: 1px solid #8B1A1A;
+    background: rgba(139,26,26,0.1);
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #c94a4a;
+  }
+
+  /* Date input */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.6);
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  interface BranchHours {
+    open: string;
+    close: string;
+  }
+
+  interface BranchService {
+    name: string;
+    price: string;
+    category: string;
+  }
+
+  interface BranchData {
+    barbers: string[];
+    services: BranchService[];
+    hours: {
+      weekday: BranchHours;
+      saturday: BranchHours;
+      sunday: BranchHours | null;
+    };
+  }
+
+  const branchData: Record<string, BranchData> = {
+    newcastle: {
+      barbers: ['Dawud', 'Tariq'],
+      services: [
+        { name: 'Classic Haircut', price: '£20', category: 'Haircuts' },
+        { name: 'Skin Fade', price: '£22', category: 'Haircuts' },
+        { name: 'Scissor Cut', price: '£25', category: 'Haircuts' },
+        { name: 'Shape Up / Line Up', price: '£15', category: 'Haircuts' },
+        { name: 'Kids Cut (under 12)', price: '£15', category: 'Haircuts' },
+        { name: 'Beard Trim', price: '£10', category: 'Beard' },
+        { name: 'Beard Shape & Line', price: '£15', category: 'Beard' },
+        { name: 'Hot Towel Shave', price: '£20', category: 'Beard' },
+        { name: 'Beard & Haircut Combo', price: '£30', category: 'Beard' },
+        { name: 'Hair Design / Pattern', price: '£5', category: 'Extras' },
+        { name: 'Eyebrow Threading', price: '£8', category: 'Extras' },
+        { name: 'Scalp Treatment', price: '£12', category: 'Extras' },
+      ],
+      hours: {
+        weekday: { open: '09:00', close: '19:00' },
+        saturday: { open: '08:00', close: '18:00' },
+        sunday: { open: '10:00', close: '16:00' }
+      }
+    },
+    durham: {
+      barbers: ['Raheem', 'Zain'],
+      services: [
+        { name: 'Classic Haircut', price: '£20', category: 'Haircuts' },
+        { name: 'Skin Fade', price: '£22', category: 'Haircuts' },
+        { name: 'Scissor Cut', price: '£25', category: 'Haircuts' },
+        { name: 'Shape Up / Line Up', price: '£15', category: 'Haircuts' },
+        { name: 'Kids Cut (under 12)', price: '£15', category: 'Haircuts' },
+        { name: 'Beard Trim', price: '£10', category: 'Beard' },
+        { name: 'Beard Shape & Line', price: '£15', category: 'Beard' },
+        { name: 'Hot Towel Shave', price: '£20', category: 'Beard' },
+        { name: 'Beard & Haircut Combo', price: '£30', category: 'Beard' },
+        { name: 'Hair Design / Pattern', price: '£5', category: 'Extras' },
+        { name: 'Eyebrow Threading', price: '£8', category: 'Extras' },
+        { name: 'Scalp Treatment', price: '£12', category: 'Extras' },
+      ],
+      hours: {
+        weekday: { open: '09:00', close: '19:00' },
+        saturday: { open: '08:00', close: '18:00' },
+        sunday: null
+      }
+    }
+  };
+
+  function generateTimeSlots(open: string, close: string): string[] {
+    const slots: string[] = [];
+    const [openH, openM] = open.split(':').map(Number);
+    const [closeH, closeM] = close.split(':').map(Number);
+    let h = openH, m = openM;
+    while (h < closeH || (h === closeH && m < closeM)) {
+      slots.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
+      m += 30;
+      if (m >= 60) { h++; m -= 60; }
+    }
+    return slots;
+  }
+
+  const branchSelect = document.getElementById('branch') as HTMLSelectElement;
+  const barberSelect = document.getElementById('barber') as HTMLSelectElement;
+  const serviceSelect = document.getElementById('service') as HTMLSelectElement;
+  const dateInput = document.getElementById('date') as HTMLInputElement;
+  const timeSelect = document.getElementById('time') as HTMLSelectElement;
+
+  // Set min date to today
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  if (dateInput) dateInput.min = `${yyyy}-${mm}-${dd}`;
+
+  function updateBranchDependents(branch: string) {
+    const data = branchData[branch];
+    if (!data) return;
+
+    barberSelect.innerHTML = '<option value="">No preference</option>';
+    data.barbers.forEach((b: string) => {
+      const opt = document.createElement('option');
+      opt.value = b.toLowerCase();
+      opt.textContent = b;
+      barberSelect.appendChild(opt);
+    });
+
+    serviceSelect.innerHTML = '<option value="" disabled selected>Select a service</option>';
+    let lastCategory = '';
+    data.services.forEach((s: BranchService) => {
+      if (s.category !== lastCategory) {
+        const group = document.createElement('optgroup');
+        group.label = s.category;
+        serviceSelect.appendChild(group);
+        lastCategory = s.category;
+      }
+      const opt = document.createElement('option');
+      opt.value = s.name.toLowerCase().replace(/\s+/g, '-');
+      opt.textContent = `${s.name} — ${s.price}`;
+      const lastGroup = serviceSelect.querySelector('optgroup:last-of-type');
+      lastGroup?.appendChild(opt);
+    });
+
+    updateTimeSlots(branch);
+  }
+
+  function updateTimeSlots(branch: string) {
+    const data = branchData[branch];
+    if (!data) return;
+
+    const selectedDate = dateInput?.value;
+    let hours: BranchHours | null = data.hours.weekday;
+
+    if (selectedDate) {
+      const dayOfWeek = new Date(selectedDate).getDay();
+      if (dayOfWeek === 6) hours = data.hours.saturday;
+      else if (dayOfWeek === 0) hours = data.hours.sunday;
+    }
+
+    timeSelect.innerHTML = '<option value="" disabled selected>Select a time slot</option>';
+
+    if (!hours) {
+      const opt = document.createElement('option');
+      opt.value = '';
+      opt.disabled = true;
+      opt.textContent = 'Closed on Sundays';
+      timeSelect.appendChild(opt);
+      return;
+    }
+
+    const slots = generateTimeSlots(hours.open, hours.close);
+    slots.forEach(slot => {
+      const opt = document.createElement('option');
+      opt.value = slot;
+      opt.textContent = slot;
+      timeSelect.appendChild(opt);
+    });
+  }
+
+  branchSelect?.addEventListener('change', () => {
+    updateBranchDependents(branchSelect.value);
+  });
+
+  dateInput?.addEventListener('change', () => {
+    if (branchSelect.value) updateTimeSlots(branchSelect.value);
+  });
+
+  function validateField(id: string, errorId: string, message: string, condition: boolean): boolean {
+    const input = document.getElementById(id);
+    const error = document.getElementById(errorId);
+    if (!condition) {
+      input?.classList.add('error');
+      if (error) error.textContent = message;
+      return false;
+    }
+    input?.classList.remove('error');
+    if (error) error.textContent = '';
+    return true;
+  }
+
+  const form = document.getElementById('booking-form') as HTMLFormElement;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nameVal = (document.getElementById('name') as HTMLInputElement).value.trim();
+    const emailVal = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const phoneVal = (document.getElementById('phone') as HTMLInputElement).value.trim();
+    const branchVal = (document.getElementById('branch') as HTMLSelectElement).value;
+    const serviceVal = (document.getElementById('service') as HTMLSelectElement).value;
+    const dateVal = (document.getElementById('date') as HTMLInputElement).value;
+    const timeVal = (document.getElementById('time') as HTMLSelectElement).value;
+
+    let valid = true;
+    valid = validateField('name', 'name-error', 'Please enter your full name.', nameVal.length > 1) && valid;
+    valid = validateField('email', 'email-error', 'Please enter a valid email address.', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) && valid;
+    valid = validateField('phone', 'phone-error', 'Please enter a valid phone number.', /^[\d\s\+\-\(\)]{7,15}$/.test(phoneVal)) && valid;
+    valid = validateField('branch', 'branch-error', 'Please select a branch.', branchVal !== '') && valid;
+    valid = validateField('service', 'service-error', 'Please select a service.', serviceVal !== '') && valid;
+    valid = validateField('date', 'date-error', 'Please select a date.', dateVal !== '') && valid;
+    valid = validateField('time', 'time-error', 'Please select a time slot.', timeVal !== '') && valid;
+
+    if (!valid) return;
+
+    const submitBtn = form.querySelector('.submit-btn') as HTMLButtonElement;
+    const submitText = form.querySelector('.submit-text') as HTMLElement;
+    const submitLoading = form.querySelector('.submit-loading') as HTMLElement;
+
+    submitBtn.disabled = true;
+    submitText.hidden = true;
+    submitLoading.hidden = false;
+
+    // TODO: Replace YOUR_FORM_ID with your Formspree endpoint: https://formspree.io/f/YOUR_FORM_ID
+    const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+    try {
+      if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+        // Demo mode — simulate success
+        await new Promise(r => setTimeout(r, 1200));
+        form.hidden = true;
+        const success = document.getElementById('form-success') as HTMLElement;
+        const successMsg = document.getElementById('success-message') as HTMLElement;
+        successMsg.textContent = `Thank you, ${nameVal}. We'll confirm your booking at ${emailVal} shortly.`;
+        success.hidden = false;
+        return;
+      }
+
+      const formData = new FormData(form);
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.hidden = true;
+        const success = document.getElementById('form-success') as HTMLElement;
+        const successMsg = document.getElementById('success-message') as HTMLElement;
+        successMsg.textContent = `Thank you, ${nameVal}. We'll confirm your booking at ${emailVal} shortly.`;
+        success.hidden = false;
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch {
+      const errorMsg = document.getElementById('form-error-msg') as HTMLElement;
+      errorMsg.hidden = false;
+      submitBtn.disabled = false;
+      submitText.hidden = false;
+      submitLoading.hidden = true;
+    }
+  });
+</script>

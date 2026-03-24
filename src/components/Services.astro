@@ -1,0 +1,197 @@
+---
+import newcastle from '../data/newcastle.json';
+import durham from '../data/durham.json';
+
+type Service = { category: string; name: string; price: string };
+
+function groupByCategory(services: Service[]): Record<string, Service[]> {
+  return services.reduce((acc: Record<string, Service[]>, s: Service) => {
+    if (!acc[s.category]) acc[s.category] = [];
+    acc[s.category].push(s);
+    return acc;
+  }, {});
+}
+
+const nclServices = groupByCategory(newcastle.services);
+const durServices = groupByCategory(durham.services);
+---
+<section id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="services-header reveal">
+      <span class="label">Services</span>
+      <div class="divider"></div>
+      <h2 id="services-heading">What We Offer</h2>
+    </div>
+
+    <div class="tab-switcher reveal reveal-delay-1" role="tablist" aria-label="Branch selector">
+      <button class="tab-btn active" id="tab-ncl" role="tab" aria-selected="true" aria-controls="services-ncl" data-branch="newcastle">
+        Newcastle
+      </button>
+      <button class="tab-btn" id="tab-dur" role="tab" aria-selected="false" aria-controls="services-dur" data-branch="durham">
+        Durham
+      </button>
+    </div>
+
+    <div id="services-ncl" role="tabpanel" aria-labelledby="tab-ncl" class="services-panel active">
+      {Object.entries(nclServices).map(([category, items]) => (
+        <div class="service-category reveal">
+          <h3 class="category-heading">{category}</h3>
+          <ul role="list" class="service-list">
+            {items.map((service) => (
+              <li class="service-row">
+                <span class="service-name">{service.name}</span>
+                <span class="service-price">{service.price}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div id="services-dur" role="tabpanel" aria-labelledby="tab-dur" class="services-panel" hidden>
+      {Object.entries(durServices).map(([category, items]) => (
+        <div class="service-category reveal">
+          <h3 class="category-heading">{category}</h3>
+          <ul role="list" class="service-list">
+            {items.map((service) => (
+              <li class="service-row">
+                <span class="service-name">{service.name}</span>
+                <span class="service-price">{service.price}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  #services {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .services-header { margin-bottom: 3rem; }
+
+  .services-header h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-top: 1rem;
+  }
+
+  .tab-switcher {
+    display: flex;
+    gap: 0;
+    margin-bottom: 3rem;
+    border: 1px solid var(--border);
+    width: fit-content;
+  }
+
+  .tab-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    min-height: 44px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .tab-btn.active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .tab-btn:not(.active):hover {
+    background: var(--accent-dim);
+    color: var(--text-primary);
+  }
+
+  .services-panel { display: none; }
+  .services-panel.active { display: block; }
+
+  .service-category { margin-bottom: 3rem; }
+
+  .category-heading {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .service-list { list-style: none; }
+
+  .service-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    transition: padding-left 0.3s ease;
+    cursor: default;
+  }
+  .service-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .service-row:hover { padding-left: 1rem; }
+  .service-row:hover::before { width: 2px; }
+
+  .service-name {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 300;
+  }
+  .service-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.services-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const branch = (tab as HTMLElement).dataset.branch;
+
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      panels.forEach(panel => {
+        panel.classList.remove('active');
+        (panel as HTMLElement).hidden = true;
+      });
+
+      const targetPanel = branch === 'newcastle'
+        ? document.getElementById('services-ncl')
+        : document.getElementById('services-dur');
+      targetPanel?.classList.add('active');
+      if (targetPanel) (targetPanel as HTMLElement).hidden = false;
+    });
+  });
+</script>
