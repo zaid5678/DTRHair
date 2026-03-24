@@ -115,15 +115,12 @@
     }
   ],
   "reviews": [
-    { "name": "Bobby", "stars": 5, "text": "", "branch": "Newcastle" },
-    { "name": "Cole", "stars": 5, "text": "", "branch": "Newcastle" },
-    { "name": "Mahdee", "stars": 5, "text": "", "branch": "Newcastle" },
-    { "name": "Sonny", "stars": 5, "text": "", "branch": "Newcastle" },
-    { "name": "Arthur", "stars": 5, "text": "", "branch": "Newcastle" },
-    { "name": "Luke", "stars": 5, "text": "", "branch": "Newcastle" },
-    { "name": "Nick", "stars": 5, "text": "", "branch": "Newcastle" },
-    { "name": "Daniel", "stars": 5, "text": "", "branch": "Newcastle" },
-    { "name": "Tanvir", "stars": 5, "text": "", "branch": "Newcastle" },
-    { "name": "Aiden", "stars": 5, "text": "", "branch": "Newcastle" }
+    { "name": "Bobby-j B", "stars": 5, "text": "Been with Yasin for a while now, couldn't go to anyone better 10/10 without fail every-time. Highly recommend" },
+    { "name": "Sonny", "stars": 5, "text": "Good environment with a really nice haircut . Definitely recommend 🙌" },
+    { "name": "Arthur", "stars": 5, "text": "Good haircut and good atmosphere in the barbers really recommend it" },
+    { "name": "Luke", "stars": 5, "text": "Ben did an amazing job, can't recommend more. All the lads are so friendly with a great atmosphere, will definitely be back!" },
+    { "name": "Reece", "stars": 5, "text": "Came and got my haircut from Ben and he sorted me right out left satisfied and in good mood with my excellent trim" },
+    { "name": "Dominic", "stars": 5, "text": "Ben is a boyo! I have been going to him for my hair for over a year now. Never fails to disappoint! Always have a nice chat with him. His trims give me a lot of confidence in myself. Thank you Ben!" },
+    { "name": "Ilyas", "stars": 5, "text": "Great haircut, and sick atmosphere at the shop." }
   ]
 }

@@ -90,9 +90,5 @@
       ]
     }
   ],
-  "reviews": [
-    { "name": "Liam C.", "stars": 5, "text": "Did an amazing job on my cut. Really took the time to understand what I was going for. Walked out feeling like a new man.", "branch": "Durham" },
-    { "name": "Daniel S.", "stars": 4, "text": "Solid barbers, really professional and the Durham branch is a great space. Sorted my curly hair out perfectly — finally found someone who knows how to handle it.", "branch": "Durham" },
-    { "name": "Aaron B.", "stars": 5, "text": "DTRHair Durham is the real deal. Clean shop, friendly staff and a genuinely excellent cut. Beard trim is second to none.", "branch": "Durham" }
-  ]
+  "reviews": []
 }
