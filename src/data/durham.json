@@ -15,14 +15,6 @@
   },
   "team": [
     {
-      "id": "ben-durham",
-      "name": "Ben",
-      "branch": "Durham",
-      "image": "/images/barbers/ben-durham.jpeg",
-      "image_placeholder": false,
-      "bio": "TODO: Add Ben's bio"
-    },
-    {
       "id": "bailey-durham",
       "name": "Bailey",
       "branch": "Durham",

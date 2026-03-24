@@ -52,23 +52,25 @@ const allBarbers = [...newcastle.team, ...durham.team];
   }
 
   .team-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: wrap;
     gap: 2px;
-  }
-
-  @media (min-width: 640px) {
-    .team-grid { grid-template-columns: 1fr 1fr; }
-  }
-
-  @media (min-width: 1024px) {
-    .team-grid { grid-template-columns: repeat(4, 1fr); }
+    justify-content: center;
   }
 
   .barber-card {
+    flex: 0 0 100%;
     background: var(--surface);
     border: 1px solid var(--border);
     overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .barber-card { flex: 0 0 calc(50% - 1px); }
+  }
+
+  @media (min-width: 1024px) {
+    .barber-card { flex: 0 0 calc(25% - 1.5px); }
   }
 
   .barber-image-wrap {
