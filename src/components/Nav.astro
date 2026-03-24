@@ -3,7 +3,9 @@ const pathname = Astro.url.pathname;
 ---
 <nav id="main-nav" aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label="DTRHair Home">DTRHair</a>
+    <a href="/" class="nav-logo" aria-label="DTRHair Home">
+      <img src="/logo.jpg" alt="DTRHair" class="nav-logo-img" />
+    </a>
     <ul class="nav-links" role="list">
       <li><a href="/about" class={pathname === '/about' ? 'active' : ''}>About</a></li>
       <li><a href="/services" class={pathname === '/services' ? 'active' : ''}>Services</a></li>
@@ -47,7 +49,7 @@ const pathname = Astro.url.pathname;
     padding: 0;
   }
   nav.scrolled {
-    background: rgba(13, 13, 13, 0.92);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -65,14 +67,16 @@ const pathname = Astro.url.pathname;
   @media (min-width: 1280px) { .nav-inner { padding: 0 80px; } }
 
   .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
-    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s;
   }
-  .nav-logo:hover { color: var(--accent); }
+  .nav-logo:hover { opacity: 0.75; }
+  .nav-logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
 
   .nav-links {
     display: none;
@@ -135,7 +139,7 @@ const pathname = Astro.url.pathname;
   .nav-hamburger span {
     display: block;
     width: 24px;
-    height: 1px;
+    height: 1.5px;
     background: var(--text-primary);
     transition: transform 0.3s, opacity 0.3s;
   }
@@ -149,7 +153,7 @@ const pathname = Astro.url.pathname;
   .mobile-menu {
     position: fixed;
     inset: 0;
-    background: var(--bg);
+    background: var(--surface);
     z-index: 999;
     display: flex;
     flex-direction: column;

@@ -6,7 +6,9 @@ import durham from '../data/durham.json';
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#hero" class="footer-logo" aria-label="DTRHair">DTRHair</a>
+        <a href="/" class="footer-logo" aria-label="DTRHair Home">
+          <img src="/logo.jpg" alt="DTRHair" class="footer-logo-img" />
+        </a>
         <p class="footer-tagline">Precision. Craft. Character.</p>
       </div>
       <div class="footer-social" aria-label="Social media links">
@@ -95,15 +97,16 @@ import durham from '../data/durham.json';
   }
 
   .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
     display: block;
-    margin-bottom: 0.5rem;
-    transition: color 0.2s;
+    margin-bottom: 0.75rem;
+    transition: opacity 0.2s;
   }
-  .footer-logo:hover { color: var(--accent); }
+  .footer-logo:hover { opacity: 0.75; }
+  .footer-logo-img {
+    height: 52px;
+    width: auto;
+    display: block;
+  }
 
   .footer-tagline {
     font-size: 0.8rem;

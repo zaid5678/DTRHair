@@ -83,7 +83,7 @@ const avatarAccents = ['#C9A96E', '#8B6F47', '#A87D4A', '#D4B07A'];
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(145deg, var(--surface-2) 0%, #1e1e1e 100%);
+    background: linear-gradient(145deg, var(--surface-2) 0%, var(--border) 100%);
     position: relative;
     filter: grayscale(1);
     transition: filter 0.4s ease;
@@ -124,11 +124,11 @@ const avatarAccents = ['#C9A96E', '#8B6F47', '#A87D4A', '#D4B07A'];
     left: 0;
     right: 0;
     height: 60%;
-    background: linear-gradient(to top, var(--surface) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(240,237,232,0.8) 0%, transparent 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
   }
-  .barber-card:hover .barber-overlay { opacity: 0.6; }
+  .barber-card:hover .barber-overlay { opacity: 1; }
 
   .barber-info {
     padding: 1.5rem;
