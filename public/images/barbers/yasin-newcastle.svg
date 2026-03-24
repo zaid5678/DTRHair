@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
-  <rect width="600" height="800" fill="#F0EDE8"/>
-  <rect x="1" y="1" width="598" height="798" fill="none" stroke="#E0DDD6" stroke-width="1"/>
-  <text x="300" y="380" font-family="Georgia, serif" font-size="220" font-weight="300" fill="#C9A96E" text-anchor="middle" dominant-baseline="middle" opacity="0.55">Y</text>
-  <text x="300" y="560" font-family="Georgia, serif" font-size="28" font-weight="400" fill="#0D0D0D" text-anchor="middle" letter-spacing="6">YASIN</text>
-  <text x="300" y="600" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6560" text-anchor="middle" letter-spacing="3">NEWCASTLE</text>
-</svg>
