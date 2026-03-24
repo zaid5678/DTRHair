@@ -39,8 +39,9 @@ const durHours    = durham.hours;
     <div id="form-container" class="reveal reveal-delay-3">
       <form id="booking-form" novalidate aria-label="Booking enquiry form">
         <input type="hidden" name="_subject" value="New Booking Request — DTRHair" />
-        <input type="hidden" name="_autoresponse" value="Thank you for your booking request at DTRHair. We've received your enquiry and will be in touch shortly to confirm your appointment." />
         <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_cc" id="hidden-cc" value="" />
+        <input type="hidden" name="_replyto" id="hidden-replyto" value="" />
         <input type="text" name="_honey" style="display:none" />
         <div class="form-grid">
           <div class="form-group">
@@ -561,6 +562,10 @@ const durHours    = durham.hours;
     valid = validateField('date',    'date-error',    'Please select a date.',                  dateVal !== '')                   && valid;
     valid = validateField('time',    'time-error',    'Please select a time slot.',             timeVal !== '')                   && valid;
     if (!valid) return;
+
+    // CC and reply-to the customer so they receive a copy
+    document.getElementById('hidden-cc').value      = emailVal;
+    document.getElementById('hidden-replyto').value = emailVal;
 
     const submitBtn     = form.querySelector('.submit-btn');
     const submitText    = form.querySelector('.submit-text');
