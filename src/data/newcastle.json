@@ -15,20 +15,20 @@
   },
   "team": [
     {
-      "id": "dean-newcastle",
-      "name": "Dean",
-      "branch": "Newcastle",
-      "image": "/images/barbers/dean-newcastle.jpeg",
-      "image_placeholder": false,
-      "bio": "TODO: Add Dean's bio"
-    },
-    {
       "id": "ben-newcastle",
       "name": "Ben",
       "branch": "Newcastle & Durham",
       "image": "/images/barbers/ben-newcastle.jpeg",
       "image_placeholder": false,
       "bio": "TODO: Add Ben's bio"
+    },
+    {
+      "id": "dean-newcastle",
+      "name": "Dean",
+      "branch": "Newcastle",
+      "image": "/images/barbers/dean-newcastle.jpeg",
+      "image_placeholder": false,
+      "bio": "TODO: Add Dean's bio"
     },
     {
       "id": "yasin-newcastle",
