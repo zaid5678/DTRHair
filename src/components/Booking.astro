@@ -38,6 +38,8 @@ const durHours    = durham.hours;
 
     <div id="form-container" class="reveal reveal-delay-3">
       <form id="booking-form" novalidate aria-label="Booking enquiry form">
+        <input type="hidden" name="_subject" value="New Booking Request — DTRHair" />
+        <input type="text" name="_gotcha" style="display:none" />
         <div class="form-grid">
           <div class="form-group">
             <label for="name" class="form-label">Full Name <span aria-hidden="true">*</span></label>
@@ -526,21 +528,10 @@ const durHours    = durham.hours;
     submitText.hidden   = true;
     submitLoading.hidden = false;
 
-    // TODO: Replace YOUR_FORM_ID with your Formspree endpoint: https://formspree.io/f/YOUR_FORM_ID
+    // Replace the value below with your Formspree form ID (https://formspree.io)
     const FORMSPREE_ID = 'YOUR_FORM_ID';
 
     try {
-      if (FORMSPREE_ID === 'YOUR_FORM_ID') {
-        // Demo mode — simulate success
-        await new Promise(r => setTimeout(r, 1000));
-        form.hidden = true;
-        const success = document.getElementById('form-success');
-        document.getElementById('success-message').textContent =
-          `Thank you, ${nameVal}. We'll confirm your booking at ${emailVal} shortly.`;
-        success.hidden = false;
-        return;
-      }
-
       const resp = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
         body: new FormData(form),
